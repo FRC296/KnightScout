@@ -9,3 +9,7 @@
 	display: flex;
 	justify-content: center;
 }
+
+.is-app-loading .navbar {
+	display: none;
+}

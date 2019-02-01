@@ -10,7 +10,31 @@
 
 		<link rel="stylesheet" type="text/css" href="css/pages.css" />
 	</head>
-	<body>
+	<body class="is-app-loading">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark js-navbar">
+			<a class="navbar-brand" href="#main" role="button">Knight Scout</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active js-navbar-item" data-active-page="#main">
+						<a class="nav-link" href="#main" role="button">Home</a>
+					</li>
+					<li class="nav-item dropdown js-navbar-item" data-active-page="#scout-page">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Scout</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#scout-page">Scout Home</a>
+							<a class="dropdown-item" href="#scout-sheet">Scout Sheet</a>
+						</div>
+					</li>
+					<li class="nav-item js-navbar-item" data-active-page="#collect-page">
+						<a class="nav-link" href="#collect-page" role="button">Collector</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 		<section class="c-splash-screen o-page--full-screen js-splash-screen">
 			<img src="assets/Double Ring-2.3s-200px.svg" />
 		</section>
@@ -27,7 +51,6 @@
 		</section>
 		<section class="o-page" data-role="page" id="scout-page">
 			<div class="container">
-				<a class="btn btn-primary btn-lg" href="#main" role="button">Home</a>
 				<div class="jumbotron">
 					<h1>Welcome Scout!</h1>
 					<br>
@@ -37,7 +60,6 @@
 		</section>
 		<section class="o-page" data-role="page" id="collect-page">
 			<div class="container">
-				<a class="btn btn-primary btn-lg" href="#main" role="button">Home</a>
 				<div class="jumbotron">
 					<h1>Welcome Collector!</h1>
 					<br>
