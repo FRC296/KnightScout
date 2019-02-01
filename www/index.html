@@ -3,16 +3,59 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-		<title>Blank App</title>
+		<title>Knight Scout</title>
 
 		<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-grid.min.css" />
+
+		<link rel="stylesheet" type="text/css" href="css/pages.css" />
 	</head>
 	<body>
+		<section class="c-splash-screen o-page--full-screen js-splash-screen">
+			<img src="assets/Double Ring-2.3s-200px.svg" />
+		</section>
+		<section class="o-page" data-role="page" id="main">
+			<div class="container">
+				<div class="jumbotron">
+					<h1 class="display-4">Welcome to the 296 Scouting Alpha!</h1>
+					<p class="lead">Please select your role:</p>
+					<br>
+					<a class="btn btn-success btn-lg" href="#scout-page" role="button">Scout</a>
+					<a class="btn btn-primary btn-lg" href="#collect-page" role="button">Collector</a>
+				</div>
+			</div>
+		</section>
+		<section class="o-page" data-role="page" id="scout-page">
+			<div class="container">
+				<a class="btn btn-primary btn-lg" href="#main" role="button">Home</a>
+				<div class="jumbotron">
+					<h1>Welcome Scout!</h1>
+					<br>
+					<a class="btn btn-success btn-lg" href="#scout-sheet" role="button">Scout a match</a>
+				</div>
+			</div>
+		</section>
+		<section class="o-page" data-role="page" id="collect-page">
+			<div class="container">
+				<a class="btn btn-primary btn-lg" href="#main" role="button">Home</a>
+				<div class="jumbotron">
+					<h1>Welcome Collector!</h1>
+					<br>
+					<button class="btn btn-success btn-lg js-scan-report">Scan Report</button>
+				</div>
+				<h2>Latest Results</h2>
+				<div>
+					<table class="js-results-table"></table>
+				</div>
+			</div>
+		</section>
+
 		<script type="text/javascript" src="cordova.js"></script>
 
 		<script type="text/javascript" src="js/vendor/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/vendor/bootstrap.bundle.min.js"></script>
+
+		<script type="text/javascript" src="js/pages.js"></script>
 	</body>
 </html>
