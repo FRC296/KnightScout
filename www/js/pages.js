@@ -3,7 +3,18 @@ document.addEventListener("deviceready", initPages, false);
 function initPages() {
 	$('.js-splash-screen').remove();
 	$('body').removeClass('is-app-loading');
-	$('[data-role="page"]#main').show();
+
+	if (window.app_state.default_event) {
+		$('[data-role="page"]#event_select').show();
+		let event_signup = new EventSignup()
+			.showSignup()
+			.onSubmit(() => {
+				$('[data-role="page"]#event_select').hide();
+				$('[data-role="page"]#main').show();
+			});
+	} else {
+		$('[data-role="page"]#main').show();
+	}
 
 	let $all_pages = $('[data-role="page"]');
 	let $navigation_tabs = $('.js-navbar-item');

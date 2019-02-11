@@ -38,6 +38,34 @@
 		<section class="c-splash-screen o-page--full-screen js-splash-screen">
 			<img src="assets/Double Ring-2.3s-200px.svg" />
 		</section>
+		<section class="o-page" data-role="page" id="event_select">
+			<div class="modal fade js-event-select-modal" id="event_select_modal" tabindex="-1" role="dialog" aria-labelledby="event_select_modal_title" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<form class="js-event-select-form">
+							<div class="modal-header">
+								<h5 class="modal-title" id="event_select_modal_title">Event Information</h5>
+							</div>
+							<div class="modal-body">
+								<p>Please enter the event code and season year information for the event you are currently scouting</p>
+								<div class="form-group">
+									<label for="event_select_year">Season Year</label>
+									<input type="number" class="form-control" id="event_select_year" placeholder="Season year" data-bind="value: event().event_year">
+								</div>
+								<div class="form-group">
+									<label for="event_select_key">Event Code</label>
+									<input type="text" class="form-control" id="event_select_key" placeholder="Event code" data-bind="value: event().event_key">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<p>Current year: <span data-bind="text: event().event_year"></span>, current event: <span data-bind="text: event().event_key"></span></p>
+								<button type="submit" class="btn btn-success" data-bind="click: save">Save</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
 		<section class="o-page" data-role="page" id="main">
 			<div class="container">
 				<div class="jumbotron">
@@ -46,6 +74,16 @@
 					<br>
 					<a class="btn btn-success btn-lg" href="#scout-page" role="button">Scout</a>
 					<a class="btn btn-primary btn-lg" href="#collect-page" role="button">Collector</a>
+				</div>
+				<div class="card js-bind-app-state">
+					<div class="card-header">
+						Current Event
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Currently Scouting</h5>
+						<p class="card-text">Event: <span data-bind="text: current_event().event_key"></span></p>
+						<p class="card-text">Season: <span data-bind="text: current_event().event_year"></span></p>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -77,7 +115,19 @@
 		<script type="text/javascript" src="js/vendor/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/vendor/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="js/vendor/knockout-3.4.2.js"></script>
 
+		<script type="text/javascript" src="js/globals.js"></script>
 		<script type="text/javascript" src="js/pages.js"></script>
+		<script type="text/javascript" src="js/event.js"></script>
+		<script>
+			window.app_state = new AppState();
+
+			$('.js-bind-app-state').get().forEach(element => ko.applyBindings(window.app_state, element));
+
+			console.log('Current Storage Usage:');
+			var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
+		</script>
 	</body>
 </html>
+
