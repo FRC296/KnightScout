@@ -71,6 +71,244 @@
 				</div>
 			</div>
 		</section>
+		<section class="o-page" data-role="page" id="scout-sheet">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm">
+						<h1>Scout Sheet</h1>
+						<form>
+							<h2>Match Information</h2>
+							<div class="form-group">
+								<label for="scout_name">Scout Name</label>
+								<input type="text" class="form-control" id="scout_name" placeholder="Enter full name">
+							</div>
+							<div class="form-row">
+								<div class="form-group col">
+									<label for="scout_event_code">Event code</label>
+									<input type="text" class="form-control" id="scout_event_code" placeholder="Event code">
+								</div>
+								<div class="form-group col">
+									<label for="scout_event_year">Event year</label>
+									<input type="text" class="form-control" id="scout_event_year" placeholder="Event year">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col">
+									<label for="scout_match_number">Match Number</label>
+									<input type="number" class="form-control" id="scout_match_number" placeholder="Match Number">
+								</div>
+								<div class="form-group col">
+									<label for="scout_match_level">Match Level</label>
+									<select id="scout_match_level" class="custom-select">
+										<option selected disabled>Select Level</option>
+										<option value="practice">Practice</option>
+										<option value="quanlification">Qualification</option>
+										<option value="playoff">Playoff</option>
+										<option value="other">Other</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="scout_team_number">Team Number</label>
+								<input type="number" class="form-control" id="scout_team_number" placeholder="Team Number">
+							</div>
+							<h2>Sandstorm</h2>
+							<div class="form-group">
+								<label for="scout_match_start_piece">Starts with</label>
+								<select id="scout_match_start_piece" class="custom-select">
+									<option selected disabled>Select Piece</option>
+									<option value="hatch">Hatch</option>
+									<option value="cargo">Cargo</option>
+									<option value="none">Nothing</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="scout_match_start_piece">Sandstorm Bonus</label>
+								<select id="scout_match_start_piece" class="custom-select">
+									<option selected disabled>Select Bonus</option>
+									<option value="1">Launched from level 1</option>
+									<option value="2">Launched from level 2</option>
+									<option value="0">Didn't pass HAB line</option>
+								</select>
+								<small class="form-text text-muted">
+									To score the sandstorm bonus, the robot must have started on a platform and drive pass the HAB line
+								</small>
+							</div>
+							<div class="form-group">
+								<label for="scout_match_start_piece">Sandstorm Mobility</label>
+								<select id="scout_match_start_piece" class="custom-select">
+									<option selected disabled>Select Mobility</option>
+									<option value="0">Didn't move</option>
+									<option value="1">Derpy movement</option>
+									<option value="2">Moves but doesn't do anything</option>
+									<option value="3">Places 1 piece</option>
+									<option value="4">Places more than 1 piece</option>
+								</select>
+							</div>
+							<h2>Teleop</h2>
+							<h3>Pick-up</h3>
+							<div class="form-row">
+								<div class="form-group col">
+									<label for="scout_match_cargo_pickup">Pickup Cargo</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<button type="button" class="btn btn-primary">-</button>
+										</div>
+										<input id="scout_match_cargo_pickup" type="number" class="form-control">
+										<div class="input-group-append">
+											<button type="button" class="btn btn-primary">+</button>
+										</div>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value="" id="scout_match_cargo_ground">
+										<label class="form-check-label" for="scout_match_cargo_ground">
+											Ground Pickup
+										</label>
+									</div>
+								</div>
+								<div class="form-group col">
+									<label for="scout_match_hatches_pickup">Pickup Hatches</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<button type="button" class="btn btn-primary">-</button>
+										</div>
+										<input id="scout_match_hatches_pickup" type="number" class="form-control">
+										<div class="input-group-append">
+											<button type="button" class="btn btn-primary">+</button>
+										</div>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value="" id="scout_match_hatches_ground">
+										<label class="form-check-label" for="scout_match_hatches_ground">
+											Ground Pickup
+										</label>
+									</div>
+								</div>
+							</div>
+							<h3>Dropoff</h3>
+							<div class="form-row">
+								<div class="form-group col">
+									<label>Cargo</label>
+									<label>Cargo Ship</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<button type="button" class="btn btn-primary">-</button>
+										</div>
+										<input id="scout_match_cargo_pickup" type="number" class="form-control">
+										<div class="input-group-append">
+											<button type="button" class="btn btn-primary">+</button>
+										</div>
+									</div>
+									<label>Rocket Ship</label>
+								</div>
+							</div>
+							<div class="o-action-menu js-action-menu">
+								<div>
+									<h3>Action Menu</h3>
+									<div class="o-action-menu__menu" data-menu="home">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item active">Action</li>
+										</ol>
+										<div class="form-row">
+											<div class="col">
+												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="p" data-next="pickup_piece" type="button">Pickup</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="d" data-next="dropoff_piece" type="button">Dropoff</button>
+											</div>
+										</div>
+									</div>
+									<div class="o-action-menu__menu" data-menu="pickup_piece">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
+											<li class="breadcrumb-item active">Game Piece</li>
+										</ol>
+										<div class="form-row">
+											<div class="col">
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="c" data-next="pickup_location" type="button">Cargo</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="h" data-next="pickup_location" type="button">Hatch</button>
+											</div>
+										</div>
+									</div>
+									<div class="o-action-menu__menu" data-menu="dropoff_piece">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
+											<li class="breadcrumb-item active">Game Piece</li>
+										</ol>
+										<div class="form-row">
+											<div class="col">
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="c" data-next="dropoff_location" type="button">Cargo</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="h" data-next="dropoff_location" type="button">Hatch</button>
+											</div>
+										</div>
+									</div>
+									<div class="o-action-menu__menu" data-menu="pickup_location">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().game_piece_formatted"></li>
+											<li class="breadcrumb-item active">Location</li>
+										</ol>
+										<div class="form-row">
+											<div class="col">
+												<button class="btn btn-success btn-lg" data-key="location" data-value="l" data-next="home" type="button" data-submit>Loading Station</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-success btn-lg" data-key="location" data-value="g" data-next="home" type="button" data-submit>Ground</button>
+											</div>
+										</div>
+									</div>
+									<div class="o-action-menu__menu" data-menu="dropoff_location">
+										<ol class="breadcrumb">
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().game_piece_formatted"></li>
+											<li class="breadcrumb-item active">Location</li>
+										</ol>
+										<div class="form-row">
+											<div class="col">
+												<button class="btn btn-success btn-lg" data-key="location" data-value="c" data-next="home" type="button" data-submit>Cargo Ship</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-success btn-lg" data-key="location" data-value="b" data-next="home" type="button" data-submit>Rocket Level 1</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-success btn-lg" data-key="location" data-value="m" data-next="home" type="button" data-submit>Rocket Level 2</button>
+											</div>
+											<div class="col">
+												<button class="btn btn-success btn-lg" data-key="location" data-value="t" data-next="home" type="button" data-submit>Rocket Level 3</button>
+											</div>
+										</div>
+									</div>
+									<button class="btn btn-danger" type="button" data-bind="click: cancel">Cancel</button>
+								</div>
+								<div>
+									<h3>Recorded Actions</h3>
+									<table class="table table-sm">
+										<thead>
+											<tr>
+												<th scope="col">Action</th>
+												<th scope="col">Game Piece</th>
+												<th scope="col">Location</th>
+											</tr>
+										</thead>
+										<tbody data-bind="foreach: actions">
+											<tr>
+												<td data-bind="text: action_name_formatted"></td>
+												<td data-bind="text: game_piece_formatted"></td>
+												<td data-bind="text: location_formatted"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
 		<section class="o-page" data-role="page" id="collect-page">
 			<div class="container">
 				<div class="jumbotron">
@@ -109,14 +347,16 @@
 								</tr>
 							</thead>
 							<tbody data-bind="foreach: current_event().matches">
-								<th scope="row" data-bind="text: match_number"></th>
-								<td data-bind="text: match_time_formatted"></td>
-								<td data-bind="text: red1"></td>
-								<td data-bind="text: red2"></td>
-								<td data-bind="text: red3"></td>
-								<td data-bind="text: blue1"></td>
-								<td data-bind="text: blue2"></td>
-								<td data-bind="text: blue3"></td>
+								<tr>
+									<th scope="row" data-bind="text: match_number"></th>
+									<td data-bind="text: match_time_formatted"></td>
+									<td data-bind="text: red1"></td>
+									<td data-bind="text: red2"></td>
+									<td data-bind="text: red3"></td>
+									<td data-bind="text: blue1"></td>
+									<td data-bind="text: blue2"></td>
+									<td data-bind="text: blue3"></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -164,9 +404,12 @@
 		<script type="text/javascript" src="js/pages.js"></script>
 		<script type="text/javascript" src="js/event.js"></script>
 		<script type="text/javascript" src="js/match.js"></script>
+		<script type="text/javascript" src="js/sheet.js"></script>
 
 		<script>
 			window.app_state = new AppState();
+
+			window.action_menu = new ActionMenu($('.js-action-menu'));
 
 			$('.js-bind-app-state').get().forEach(element => ko.applyBindings(window.app_state, element));
 
@@ -175,4 +418,5 @@
 		</script>
 	</body>
 </html>
+
 
