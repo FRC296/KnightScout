@@ -1,5 +1,7 @@
 class AppState {
 	constructor() {
+		this.event_signup = new EventSignup();
+
 		let stored_events = JSON.parse(localStorage.getItem('events') || null);
 		let stored_current_event = JSON.parse(localStorage.getItem('current_event') || null);
 
@@ -26,7 +28,7 @@ class AppState {
 	}
 
 	setCurrentEvent(event) {
-		let existing_event = this.findEvent(event);
+		let existing_event = this.findEvent(ko.toJS(event));
 
 		if (existing_event) {
 			this.current_event(existing_event);
@@ -40,5 +42,9 @@ class AppState {
 
 	findEvent(event) {
 		return this.events().find(stored_event => stored_event.equalsEvent(event))
+	}
+
+	showEventSignup() {
+		this.event_signup.showSignup(ko.toJS(this.current_event()));
 	}
 }

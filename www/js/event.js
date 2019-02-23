@@ -6,7 +6,10 @@ class EventSignup {
 		ko.applyBindings(this, this.$signup_form[0]);
 	}
 
-	showSignup() {
+	showSignup(event) {
+		if (event) {
+			this.event(new Event(event));
+		}
 		this.$signup_modal.modal({
 			keyboard: false,
 			backdrop: 'static'
@@ -23,7 +26,10 @@ class EventSignup {
 	save() {
 		this.$signup_modal.modal('hide')
 		window.app_state.setCurrentEvent(this.event());
-		this._on_submit();
+		if (this._on_submit) {
+			this._on_submit();
+			this._on_submit = undefined;
+		}
 	}
 
 }
@@ -49,6 +55,7 @@ class Event {
 			}
 		}).done(matches => {
 			console.log(matches);
+			this.matches(matches.Schedule.map(match => BuildMatch(match)));
 		});
 	}
 }
