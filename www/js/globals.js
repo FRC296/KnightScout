@@ -11,7 +11,7 @@ class AppState {
 			this.events = ko.observableArray();
 		}
 
-		this.current_event = ko.observable(new Event(this.findEvent(stored_current_event) || undefined));
+		this.current_event = ko.observable(new Event(ko.toJS(this.findEvent(stored_current_event)) || undefined));
 		this.current_event.subscribe((event) => {
 			this.default_event = false;
 			localStorage.setItem('current_event', JSON.stringify({

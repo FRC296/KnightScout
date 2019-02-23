@@ -39,4 +39,16 @@ class Event {
 	equalsEvent(event) {
 		return event.event_key === this.event_key() && event.event_year === this.event_year();
 	}
+
+	downloadMatches() {
+		$.ajax({
+			dataType: "json",
+			url: `https://frc-api.firstinspires.org/v2.0/${this.event_year()}/schedule/${this.event_key()}?tournamentLevel=Qualification`,
+			beforeSend: xhr => {
+				xhr.setRequestHeader("Authorization", "Basic " + FRC_AUTH);
+			}
+		}).done(matches => {
+			console.log(matches);
+		});
+	}
 }
