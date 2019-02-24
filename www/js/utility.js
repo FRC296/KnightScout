@@ -19,5 +19,3 @@ function calculateUsedStorage() {
 
 	return (_lsTotal / 1024).toFixed(2) + " KB";
 }
-
-calculateUsedStorage();
