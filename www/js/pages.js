@@ -35,4 +35,12 @@ function initPages() {
 			return false;
 		});
 	});
+
+	window.goToPage = function(page) {
+		$all_pages.hide();
+		$(`#${page}`).show();
+
+		$navigation_tabs.removeClass('active');
+		$navigation_tabs.filter(`[data-active-page="#${page}"]`).addClass('active');
+	}
 }
