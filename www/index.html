@@ -35,6 +35,9 @@
 					<li class="nav-item js-navbar-item" data-active-page="#event-page">
 						<a class="nav-link" href="#event-page" role="button">Event</a>
 					</li>
+					<li class="nav-item js-navbar-item" data-active-page="#utilities">
+						<a class="nav-link" href="#utilities" role="button">Utilities</a>
+					</li>
 				</ul>
 			</div>
 		</nav>
@@ -413,6 +416,52 @@
 				</div>
 			</div>
 		</section>
+		<section class="o-page" data-role="page" id="utilities">
+			<div class="container">
+				</br>
+				<div class="row">
+					<div class="col-sm">
+						<div class="card">
+							<div class="card-header">
+								Device Info
+							</div>
+							<div class="card-body">
+								<p>Max Integer <span class="js-max-integer"></span></p>
+								<p>Current App Storage Usage <span class="js-storage-usage"></span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				</br>
+				<div class="row">
+					<div class="col-sm">
+						<div class="card">
+							<div class="card-header">
+								Backup Data
+							</div>
+							<div class="card-body">
+								<button class="btn btn-success js-backup-scout-data">Backup Scout Data</button></br></br>
+								<textarea class="form-control js-backup-output" rows="10" readonly data-bind="value: comments"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				</br>
+				<div class="row">
+					<div class="col-sm">
+						<div class="card">
+							<div class="card-header">
+								Data Clenup
+							</div>
+							<div class="card-body">
+								<button class="btn btn-danger">Delete Event Information</button></br></br>
+								<button class="btn btn-danger">Delete Scout Sheet Information</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<div class="modal fade js-event-select-modal" id="event_select_modal" tabindex="-1" role="dialog" aria-labelledby="event_select_modal_title" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
@@ -456,6 +505,7 @@
 		<script type="text/javascript" src="js/match.js"></script>
 		<script type="text/javascript" src="js/sheet.js"></script>
 		<script type="text/javascript" src="js/scout.js"></script>
+		<script type="text/javascript" src="js/utility.js"></script>
 
 		<script>
 			window.app_state = new AppState();
@@ -463,11 +513,7 @@
 			//window.action_menu = new ActionMenu($('.js-action-menu'));
 
 			$('.js-bind-app-state').get().forEach(element => ko.applyBindings(window.app_state, element));
-
-			console.log('Current Storage Usage:');
-			var _lsTotal=0,_xLen,_x;for(_x in localStorage){ if(!localStorage.hasOwnProperty(_x)){continue;} _xLen= ((localStorage[_x].length + _x.length)* 2);_lsTotal+=_xLen; console.log(_x.substr(0,50)+" = "+ (_xLen/1024).toFixed(2)+" KB")};console.log("Total = " + (_lsTotal / 1024).toFixed(2) + " KB");
 		</script>
 	</body>
 </html>
-
 
