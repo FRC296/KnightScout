@@ -39,41 +39,31 @@ class Action {
 
 
 class ActionMenu {
-	constructor($container) {
-		this.$menus = $('[data-menu]', $container);
-		this.$menus
-			.hide()
-			.filter('[data-menu="home"]').show();
-		this.$buttons = $('button[data-key]', $container);
+	constructor() {
 		this.current_action = ko.observable(new Action());
 		this.actions = ko.observableArray();
-
-
-		this.$buttons.on('click', event => {
-			let $button = $(event.target);
-			this.current_action()[$button.data('key')]($button.data('value'));
-			this.$menus
-				.hide()
-				.filter(`[data-menu="${$button.data('next')}"]`)
-				.show();
-
-			if ($button.is('[data-submit]')) {
-				this.actions.push(this.current_action());
-				this.current_action(new Action());
-			}
-		});
+		this.current_menu = ko.observable('home');
 	}
 
 	cancel() {
 		this.current_action(new Action());
-		this.$menus
-			.hide()
-			.filter('[data-menu="home"]').show();
+		this.current_menu('home');
+	}
+
+	updateMenu(data, event) {
+		let $button = $(event.target);
+		this.current_action()[$button.data('key')]($button.data('value'));
+		this.current_menu($button.data('next'));
+
+		if ($button.is('[data-submit]')) {
+			this.actions.push(this.current_action());
+			this.current_action(new Action());
+		}
 	}
 }
 
 class Sheet {
-	constructor($container, current_event) {
+	constructor(current_event) {
 		this.scout_name = ko.observable();
 		this.event_key = ko.observable(current_event ? current_event.event_key() : undefined);
 		this.event_year = ko.observable(current_event ? current_event.event_year() : undefined);
@@ -95,7 +85,7 @@ class Sheet {
 		this.robot_speed = ko.observable();
 		this.comments = ko.observable();
 
-		this.action_menu = new ActionMenu($('.js-action-menu', $container));
+		this.action_menu = new ActionMenu();
 	}
 
 	addDefenseInteraction() {

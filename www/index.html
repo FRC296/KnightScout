@@ -186,48 +186,48 @@
 							<div class="o-action-menu js-action-menu" data-bind="with: action_menu">
 								<div>
 									<h3>Offensive Actions</h3>
-									<div class="o-action-menu__menu" data-menu="home">
+									<div class="o-action-menu__menu" data-menu="home" data-bind="if: current_menu() === 'home'">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item active">Action</li>
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="0" data-next="pickup_piece" type="button">Pickup</button>
+												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="0" data-next="pickup_piece" data-bind="click: updateMenu" type="button">Pickup</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="1" data-next="dropoff_piece" type="button">Dropoff</button>
+												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="1" data-next="dropoff_piece" data-bind="click: updateMenu" type="button">Dropoff</button>
 											</div>
 										</div>
 									</div>
-									<div class="o-action-menu__menu" data-menu="pickup_piece">
+									<div class="o-action-menu__menu" data-menu="pickup_piece" data-bind="if: current_menu() === 'pickup_piece'">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
 											<li class="breadcrumb-item active">Game Piece</li>
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="pickup_location" type="button">Cargo</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="pickup_location" data-bind="click: updateMenu" type="button">Cargo</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="pickup_location" type="button">Hatch</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="pickup_location" data-bind="click: updateMenu" type="button">Hatch</button>
 											</div>
 										</div>
 									</div>
-									<div class="o-action-menu__menu" data-menu="dropoff_piece">
+									<div class="o-action-menu__menu" data-menu="dropoff_piece" data-bind="if: current_menu() === 'dropoff_piece'">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
 											<li class="breadcrumb-item active">Game Piece</li>
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="dropoff_location" type="button">Cargo</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="dropoff_location" data-bind="click: updateMenu" type="button">Cargo</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="dropoff_location" type="button">Hatch</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="dropoff_location" data-bind="click: updateMenu" type="button">Hatch</button>
 											</div>
 										</div>
 									</div>
-									<div class="o-action-menu__menu" data-menu="pickup_location">
+									<div class="o-action-menu__menu" data-menu="pickup_location" data-bind="if: current_menu() === 'pickup_location'">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
 											<li class="breadcrumb-item" data-bind="text: current_action().game_piece_formatted"></li>
@@ -235,14 +235,14 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="1" data-next="home" type="button" data-submit>Loading Station</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="1" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Loading Station</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="0" data-next="home" type="button" data-submit>Ground</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="0" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Ground</button>
 											</div>
 										</div>
 									</div>
-									<div class="o-action-menu__menu" data-menu="dropoff_location">
+									<div class="o-action-menu__menu" data-menu="dropoff_location" data-bind="if: current_menu() === 'dropoff_location'">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
 											<li class="breadcrumb-item" data-bind="text: current_action().game_piece_formatted"></li>
@@ -250,16 +250,16 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="2" data-next="home" type="button" data-submit>Cargo Ship</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="2" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Cargo Ship</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="3" data-next="home" type="button" data-submit>Rocket Level 1</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="3" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Rocket Level 1</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="4" data-next="home" type="button" data-submit>Rocket Level 2</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="4" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Rocket Level 2</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="5" data-next="home" type="button" data-submit>Rocket Level 3</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="5" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Rocket Level 3</button>
 											</div>
 										</div>
 									</div>
