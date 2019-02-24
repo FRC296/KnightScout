@@ -5,11 +5,11 @@ function initPages() {
 	$('body').removeClass('is-app-loading');
 
 	if (window.app_state.default_event) {
-		$('[data-role="page"]#event_select').show();
-		let event_signup = new EventSignup()
+		//$('[data-role="page"]#event_select').show();
+		window.app_state.event_signup
 			.showSignup()
 			.onSubmit(() => {
-				$('[data-role="page"]#event_select').hide();
+				//$('[data-role="page"]#event_select').hide();
 				$('[data-role="page"]#main').show();
 			});
 	} else {
