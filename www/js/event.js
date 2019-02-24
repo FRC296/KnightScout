@@ -48,12 +48,9 @@ class Event {
 
 	downloadMatches() {
 		$.ajax({
-			dataType: "json",
-			url: `https://frc-api.firstinspires.org/v2.0/${this.event_year()}/schedule/${this.event_key()}?tournamentLevel=Qualification`,
-			beforeSend: xhr => {
-				xhr.setRequestHeader("Authorization", "Basic " + FRC_AUTH);
-			}
-		}).done(matches => {
+			url: `http://netopyaplanet.com/knightscout/relay.php?year=${this.event_year()}&key=${this.event_key()}&level=Qualification`
+		}).done(response => {
+			let matches = JSON.parse(response);
 			console.log(matches);
 			this.matches(matches.Schedule.map(match => BuildMatch(match)));
 		});
