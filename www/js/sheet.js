@@ -1,21 +1,30 @@
-const ACTION_MAPPING = {
-	p: 'Pickup',
-	d: 'Dropoff'
-}
+const TOURNAMENT_LEVELS = [
+	'Qualification',
+	'Playoff',
+	'Practice',
+	'Other'
+]
 
-const GAME_PIECE_MAPPING = {
-	c: 'Cargo',
-	h: 'Hatch'
-}
 
-const LOCATION_MAPPING = {
-	g: 'Ground',
-	l: 'Loading Station',
-	c: 'Cargo Ship',
-	b: 'Rocket Level 1',
-	m: 'Rocket Level 2',
-	t: 'Rocket Level 3'
-}
+const ACTION_MAPPING = [
+	'Pickup',
+	'Dropoff'
+];
+
+const GAME_PIECE_MAPPING = [
+	'Cargo',
+	'Hatch',
+	'None'
+]
+
+const LOCATION_MAPPING = [
+	'Ground',
+	'Loading Station',
+	'Cargo Ship',
+	'Rocket Level 1',
+	'Rocket Level 2',
+	'Rocket Level 3'
+];
 
 class Action {
 	constructor() {
@@ -27,6 +36,7 @@ class Action {
 		this.location_formatted = ko.computed(() => LOCATION_MAPPING[this.location()], this);
 	}
 }
+
 
 class ActionMenu {
 	constructor($container) {
@@ -52,8 +62,6 @@ class ActionMenu {
 				this.current_action(new Action());
 			}
 		});
-
-		ko.applyBindings(this, $container[0]);
 	}
 
 	cancel() {
@@ -61,5 +69,39 @@ class ActionMenu {
 		this.$menus
 			.hide()
 			.filter('[data-menu="home"]').show();
+	}
+}
+
+class Sheet {
+	constructor($container, current_event) {
+		this.scout_name = ko.observable();
+		this.event_key = ko.observable(current_event ? current_event.event_key() : undefined);
+		this.event_year = ko.observable(current_event ? current_event.event_year() : undefined);
+		this.match_number = ko.observable();
+		this.match_level = ko.observable();
+		this.team_number = ko.observable();
+
+		this.starts_with = ko.observable();
+		this.auton_bonus = ko.observable();
+		this.auton_mobility = ko.observable();
+
+		this.defense_count = ko.observable(0);
+
+		this.end_platform = ko.observable();
+		this.climb_speed = ko.observable();
+		this.carried = ko.observable(false);
+
+		this.robot_speed = ko.observable();
+		this.comments = ko.observable();
+
+		this.action_menu = new ActionMenu($('.js-action-menu', $container));
+	}
+
+	addDefenseInteraction() {
+		this.defense_count(this.defense_count() + 1);
+	}
+
+	removeDefenseInteraction() {
+		this.defense_count(Math.max(this.defense_count() - 1, 0));
 	}
 }

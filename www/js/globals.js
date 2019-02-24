@@ -25,6 +25,8 @@ class AppState {
 		this.events.subscribe(events => {
 			localStorage.setItem('events', ko.toJSON(events));
 		});
+
+		this.current_sheet = ko.observable(new Sheet($('.js-scout-sheet'), this.current_event()));
 	}
 
 	setCurrentEvent(event) {

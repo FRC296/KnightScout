@@ -71,8 +71,8 @@
 				</div>
 			</div>
 		</section>
-		<section class="o-page" data-role="page" id="scout-sheet">
-			<div class="container">
+		<section class="o-page js-bind-app-state js-scout-sheet" data-role="page" id="scout-sheet">
+			<div class="container" data-bind="with: current_sheet()">
 				<div class="row">
 					<div class="col-sm">
 						<h1>Scout Sheet</h1>
@@ -80,51 +80,51 @@
 							<h2>Match Information</h2>
 							<div class="form-group">
 								<label for="scout_name">Scout Name</label>
-								<input type="text" class="form-control" id="scout_name" placeholder="Enter full name">
+								<input type="text" class="form-control" id="scout_name" placeholder="Enter full name" data-bind="value: scout_name">
 							</div>
 							<div class="form-row">
 								<div class="form-group col">
 									<label for="scout_event_code">Event code</label>
-									<input type="text" class="form-control" id="scout_event_code" placeholder="Event code">
+									<input type="text" class="form-control" id="scout_event_code" placeholder="Event code" data-bind="value: event_key">
 								</div>
 								<div class="form-group col">
 									<label for="scout_event_year">Event year</label>
-									<input type="text" class="form-control" id="scout_event_year" placeholder="Event year">
+									<input type="text" class="form-control" id="scout_event_year" placeholder="Event year" data-bind="value: event_year">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col">
 									<label for="scout_match_number">Match Number</label>
-									<input type="number" class="form-control" id="scout_match_number" placeholder="Match Number">
+									<input type="number" class="form-control" id="scout_match_number" placeholder="Match Number" data-bind="value: match_number">
 								</div>
 								<div class="form-group col">
 									<label for="scout_match_level">Match Level</label>
-									<select id="scout_match_level" class="custom-select">
+									<select id="scout_match_level" class="custom-select" data-bind="value: match_level">
 										<option selected disabled>Select Level</option>
-										<option value="practice">Practice</option>
-										<option value="quanlification">Qualification</option>
-										<option value="playoff">Playoff</option>
-										<option value="other">Other</option>
+										<option value="2">Practice</option>
+										<option value="0">Qualification</option>
+										<option value="1">Playoff</option>
+										<option value="3">Other</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="scout_team_number">Team Number</label>
-								<input type="number" class="form-control" id="scout_team_number" placeholder="Team Number">
+								<input type="number" class="form-control" id="scout_team_number" placeholder="Team Number" data-bind="value: team_number">
 							</div>
 							<h2>Sandstorm</h2>
 							<div class="form-group">
 								<label for="scout_match_start_piece">Starts with</label>
-								<select id="scout_match_start_piece" class="custom-select">
+								<select id="scout_match_start_piece" class="custom-select" data-bind="value: starts_with">
 									<option selected disabled>Select Piece</option>
-									<option value="hatch">Hatch</option>
-									<option value="cargo">Cargo</option>
-									<option value="none">Nothing</option>
+									<option value="1">Hatch</option>
+									<option value="0">Cargo</option>
+									<option value="2">Nothing</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="scout_match_start_piece">Sandstorm Bonus</label>
-								<select id="scout_match_start_piece" class="custom-select">
+								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_bonus">
 									<option selected disabled>Select Bonus</option>
 									<option value="1">Launched from level 1</option>
 									<option value="2">Launched from level 2</option>
@@ -136,7 +136,7 @@
 							</div>
 							<div class="form-group">
 								<label for="scout_match_start_piece">Sandstorm Mobility</label>
-								<select id="scout_match_start_piece" class="custom-select">
+								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_mobility">
 									<option selected disabled>Select Mobility</option>
 									<option value="0">Didn't move</option>
 									<option value="1">Derpy movement</option>
@@ -146,7 +146,7 @@
 								</select>
 							</div>
 							<h2>Teleop</h2>
-							<div class="o-action-menu js-action-menu">
+							<div class="o-action-menu js-action-menu" data-bind="with: action_menu">
 								<div>
 									<h3>Offensive Actions</h3>
 									<div class="o-action-menu__menu" data-menu="home">
@@ -155,10 +155,10 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="p" data-next="pickup_piece" type="button">Pickup</button>
+												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="0" data-next="pickup_piece" type="button">Pickup</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="d" data-next="dropoff_piece" type="button">Dropoff</button>
+												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="1" data-next="dropoff_piece" type="button">Dropoff</button>
 											</div>
 										</div>
 									</div>
@@ -169,10 +169,10 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="c" data-next="pickup_location" type="button">Cargo</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="pickup_location" type="button">Cargo</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="h" data-next="pickup_location" type="button">Hatch</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="pickup_location" type="button">Hatch</button>
 											</div>
 										</div>
 									</div>
@@ -183,10 +183,10 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="c" data-next="dropoff_location" type="button">Cargo</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="dropoff_location" type="button">Cargo</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="h" data-next="dropoff_location" type="button">Hatch</button>
+												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="dropoff_location" type="button">Hatch</button>
 											</div>
 										</div>
 									</div>
@@ -198,10 +198,10 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="l" data-next="home" type="button" data-submit>Loading Station</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="1" data-next="home" type="button" data-submit>Loading Station</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="g" data-next="home" type="button" data-submit>Ground</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="0" data-next="home" type="button" data-submit>Ground</button>
 											</div>
 										</div>
 									</div>
@@ -213,16 +213,16 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="c" data-next="home" type="button" data-submit>Cargo Ship</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="2" data-next="home" type="button" data-submit>Cargo Ship</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="b" data-next="home" type="button" data-submit>Rocket Level 1</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="3" data-next="home" type="button" data-submit>Rocket Level 1</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="m" data-next="home" type="button" data-submit>Rocket Level 2</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="4" data-next="home" type="button" data-submit>Rocket Level 2</button>
 											</div>
 											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="t" data-next="home" type="button" data-submit>Rocket Level 3</button>
+												<button class="btn btn-success btn-lg" data-key="location" data-value="5" data-next="home" type="button" data-submit>Rocket Level 3</button>
 											</div>
 										</div>
 									</div>
@@ -252,11 +252,11 @@
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-prepend">
-										<button type="button" class="btn btn-success">Log Defensive Interaction</button>
+										<button type="button" class="btn btn-success" data-bind="click: addDefenseInteraction">Log Defensive Interaction</button>
 									</div>
-									<input id="scout_match_defense" type="number" class="form-control">
+									<input id="scout_match_defense" type="number" class="form-control" data-bind="value: defense_count">
 									<div class="input-group-append">
-										<button type="button" class="btn btn-danger">-</button>
+										<button type="button" class="btn btn-danger" data-bind="click: removeDefenseInteraction">-</button>
 									</div>
 								</div>
 								<small class="form-text text-muted">
@@ -271,7 +271,7 @@
 							<div class="form-row">
 								<div class="form-group col-6 col-md-5">
 									<label for="scout_match_end_platform">End Platform</label>
-									<select id="scout_match_end_platform" class="custom-select">
+									<select id="scout_match_end_platform" class="custom-select" data-bind="value: end_platform">
 										<option selected disabled>Select Platform</option>
 										<option value="0">Didn't make it to platform</option>
 										<option value="1">Level 1</option>
@@ -282,7 +282,7 @@
 								</div>
 								<div class="form-group col-6 col-md-5">
 									<label for="scout_match_climb_speed">Climb Speed</label>
-									<select id="scout_match_climb_speed" class="custom-select">
+									<select id="scout_match_climb_speed" class="custom-select" data-bind="value: climb_speed">
 										<option selected disabled>Select Speed</option>
 										<option value="0">Didn't climb</option>
 										<option value="1">1-3 seconds</option>
@@ -293,7 +293,7 @@
 								<div class="form-group col-6 col-md-2">
 									<label>&nbsp;</label>
 									<div class="form-check">
-										<input class="form-check-input" type="checkbox" value="" id="scout_match_climb_help">
+										<input class="form-check-input" type="checkbox" id="scout_match_climb_help" data-bind="checked: carried">
 										<label class="form-check-label" for="scout_match_climb_help">
 											Carried another robot
 										</label>
@@ -303,7 +303,7 @@
 							<h2>Overall</h2>
 							<div class="form-group">
 								<label for="scout_match_speed">Robot Speed</label>
-								<select id="scout_match_speed" class="custom-select">
+								<select id="scout_match_speed" class="custom-select" data-bind="value: robot_speed">
 									<option selected disabled>Select Speed</option>
 									<option value="0">1 - Slow</option>
 									<option value="1">2</option>
@@ -314,7 +314,7 @@
 							</div>
 							<div class="form-group">
 								<label>Comments</label>
-								<textarea class="form-control" id="scout_match_notes" rows="5"></textarea>
+								<textarea class="form-control" id="scout_match_notes" rows="5" data-bind="value: comments"></textarea>
 							</div>
 						</form>
 					</div>
@@ -421,7 +421,7 @@
 		<script>
 			window.app_state = new AppState();
 
-			window.action_menu = new ActionMenu($('.js-action-menu'));
+			//window.action_menu = new ActionMenu($('.js-action-menu'));
 
 			$('.js-bind-app-state').get().forEach(element => ko.applyBindings(window.app_state, element));
 
