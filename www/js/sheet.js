@@ -80,6 +80,7 @@ class Sheet {
 		this.match_number = ko.observable();
 		this.match_level = ko.observable();
 		this.team_number = ko.observable();
+		this.alliance = ko.observable();
 
 		this.starts_with = ko.observable();
 		this.auton_bonus = ko.observable();

@@ -62,21 +62,48 @@
 				</div>
 			</div>
 		</section>
-		<section class="o-page" data-role="page" id="scout-page">
+		<section class="o-page js-bind-app-state" data-role="page" id="scout-page" data-bind="with: scout">
 			<div class="container">
 				<div class="jumbotron">
 					<h1>Welcome Scout!</h1>
 					<br>
 					<a class="btn btn-success btn-lg" href="#scout-sheet" role="button">Scout a match</a>
 				</div>
+				<div class="row">
+					<div class="col">
+						<h2>Scout Sheets</h2>
+						<table class="table table-sm">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Team</th>
+									<th scope="col">Actions</th>
+									<th scope="col">Defense</th>
+									<th scope="col">Edit</th>
+									<th scope="col">QR Code</th>
+								</tr>
+							</thead>
+							<tbody data-bind="foreach: sheets">
+								<tr>
+									<th scope="row" data-bind="text: match_number"></th>
+									<td data-bind="text: team_number"></td>
+									<td data-bind="text: action_menu.actions().length"></td>
+									<td data-bind="text: defense_count"></td>
+									<td><button class="btn btn-warning" data-bind="click: $parent.editSheet">Edit</button></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</section>
-		<section class="o-page js-bind-app-state js-scout-sheet" data-role="page" id="scout-sheet">
-			<div class="container" data-bind="with: current_sheet()">
+		<section class="o-page js-bind-app-state js-scout-sheet" data-role="page" data-bind="with: scout" id="scout-sheet">
+			<div class="container">
 				<div class="row">
 					<div class="col-sm">
 						<h1>Scout Sheet</h1>
-						<form>
+						<form data-bind="with: current_sheet()">
 							<h2>Match Information</h2>
 							<div class="form-group">
 								<label for="scout_name">Scout Name</label>
@@ -108,9 +135,19 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="scout_team_number">Team Number</label>
-								<input type="number" class="form-control" id="scout_team_number" placeholder="Team Number" data-bind="value: team_number">
+							<div class="form-row">
+								<div class="form-group col">
+									<label for="scout_team_number">Team Number</label>
+									<input type="number" class="form-control" id="scout_team_number" placeholder="Team Number" data-bind="value: team_number">
+								</div>
+								<div class="form-group col">
+									<label for="scout_match_alliance">Alliance</label>
+									<select id="scout_match_alliance" class="custom-select" data-bind="value: alliance">
+										<option selected disabled>Select Level</option>
+										<option value="0">Blue</option>
+										<option value="1">Red</option>
+									</select>
+								</div>
 							</div>
 							<h2>Sandstorm</h2>
 							<div class="form-group">
@@ -317,6 +354,7 @@
 								<textarea class="form-control" id="scout_match_notes" rows="5" data-bind="value: comments"></textarea>
 							</div>
 						</form>
+						<button class="btn btn-success" data-bind="click: submitSheet">Submit Scout Sheet</button>
 					</div>
 				</div>
 			</div>
@@ -417,6 +455,7 @@
 		<script type="text/javascript" src="js/event.js"></script>
 		<script type="text/javascript" src="js/match.js"></script>
 		<script type="text/javascript" src="js/sheet.js"></script>
+		<script type="text/javascript" src="js/scout.js"></script>
 
 		<script>
 			window.app_state = new AppState();
