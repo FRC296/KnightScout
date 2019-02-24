@@ -1,7 +1,7 @@
 class Match {
 	constructor(event_info = {}) {
 		this.match_number = event_info.match_number || 0;
-		this.match_time = event_info.match_time || new Date(0);
+		this.match_time = event_info.match_time ? new Date(event_info.match_time) : new Date(0);
 		this.match_time_formatted = moment(this.match_time).format('H:mm');
 		this.red1 = event_info.red1 || 0;
 		this.red2 = event_info.red2 || 0;

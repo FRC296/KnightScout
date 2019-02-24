@@ -13,7 +13,7 @@ class AppState {
 			this.events = ko.observableArray();
 		}
 
-		this.current_event = ko.observable(new Event(ko.toJS(this.findEvent(stored_current_event)) || undefined));
+		this.current_event = ko.observable(this.findEvent(stored_current_event) || undefined);
 		this.current_event.subscribe((event) => {
 			this.default_event = false;
 			localStorage.setItem('current_event', JSON.stringify({
@@ -22,9 +22,14 @@ class AppState {
 			}));
 		});
 
-		this.events.subscribe(events => {
-			localStorage.setItem('events', ko.toJSON(events));
+		this.events.subscribe(() => {
+			$(document).trigger('persist_events');
 		});
+
+		$(document).on('persist_events', () => {
+			console.log('saving event info');
+			localStorage.setItem('events', ko.toJSON(this.events));
+		})
 
 		//this.current_sheet = ko.observable(new Sheet($('.js-scout-sheet'), this.current_event()));
 		this.scout = new Scout(this);
