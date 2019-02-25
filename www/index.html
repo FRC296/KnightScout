@@ -46,6 +46,7 @@
 		</section>
 		<section class="o-page" data-role="page" id="main">
 			<div class="container">
+				</br>
 				<div class="jumbotron">
 					<h1 class="display-4">Welcome to the 296 Scouting Alpha!</h1>
 					<p class="lead">Please select your role:</p>
@@ -204,7 +205,7 @@
 									</div>
 									<div class="o-action-menu__menu" data-menu="pickup_piece" data-bind="if: current_menu() === 'pickup_piece'">
 										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
 											<li class="breadcrumb-item active">Game Piece</li>
 										</ol>
 										<div class="form-row">
@@ -218,7 +219,7 @@
 									</div>
 									<div class="o-action-menu__menu" data-menu="dropoff_piece" data-bind="if: current_menu() === 'dropoff_piece'">
 										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
 											<li class="breadcrumb-item active">Game Piece</li>
 										</ol>
 										<div class="form-row">
@@ -232,8 +233,8 @@
 									</div>
 									<div class="o-action-menu__menu" data-menu="pickup_location" data-bind="if: current_menu() === 'pickup_location'">
 										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
-											<li class="breadcrumb-item" data-bind="text: current_action().game_piece_formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().game_piece.formatted"></li>
 											<li class="breadcrumb-item active">Location</li>
 										</ol>
 										<div class="form-row">
@@ -247,8 +248,8 @@
 									</div>
 									<div class="o-action-menu__menu" data-menu="dropoff_location" data-bind="if: current_menu() === 'dropoff_location'">
 										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name_formatted"></li>
-											<li class="breadcrumb-item" data-bind="text: current_action().game_piece_formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
+											<li class="breadcrumb-item" data-bind="text: current_action().game_piece.formatted"></li>
 											<li class="breadcrumb-item active">Location</li>
 										</ol>
 										<div class="form-row">
@@ -280,9 +281,9 @@
 										</thead>
 										<tbody data-bind="foreach: actions">
 											<tr>
-												<td data-bind="text: action_name_formatted"></td>
-												<td data-bind="text: game_piece_formatted"></td>
-												<td data-bind="text: location_formatted"></td>
+												<td data-bind="text: action_name.formatted"></td>
+												<td data-bind="text: game_piece.formatted"></td>
+												<td data-bind="text: location.formatted"></td>
 											</tr>
 										</tbody>
 									</table>
