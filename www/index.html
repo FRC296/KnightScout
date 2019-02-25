@@ -58,10 +58,10 @@
 					<div class="card-header">
 						Current Event
 					</div>
-					<div class="card-body">
+					<div class="card-body" data-bind="with: current_event">
 						<h5 class="card-title">Currently Scouting</h5>
-						<p class="card-text">Event: <span data-bind="text: current_event().event_key"></span></p>
-						<p class="card-text">Season: <span data-bind="text: current_event().event_year"></span></p>
+						<p class="card-text">Event: <span data-bind="text: event_key"></span></p>
+						<p class="card-text">Season: <span data-bind="text: event_year"></span></p>
 					</div>
 				</div>
 			</div>
@@ -376,13 +376,13 @@
 				</div>
 			</div>
 		</section>
-		<section class="o-page" data-role="page" id="event-page">
-			<div class="container js-bind-app-state">
+		<section class="o-page js-bind-app-state" data-role="page" id="event-page">
+			<div class="container" data-bind="with: current_event">
 				<div class="jumbotron">
 					<h1>Event Info</h1>
-					<p class="lead">Current event: <span data-bind="text: current_event().event_key"></span> <span data-bind="text: current_event().event_year"></span></p>
-					<button class="btn btn-warning btn-lg" data-bind="click: showEventSignup">Change Event</button>
-					<button class="btn btn-primary btn-lg" data-bind="click: current_event().downloadMatches.bind(current_event())">Download Matches</button>
+					<p class="lead">Current event: <span data-bind="text: event_key"></span> <span data-bind="text: event_year"></span></p>
+					<button class="btn btn-warning btn-lg" data-bind="click: $parent.showEventSignup.bind($parent)">Change Event</button>
+					<button class="btn btn-primary btn-lg" data-bind="click: downloadMatches">Download Matches</button>
 				</div>
 				<div class="row">
 					<div class="col-sm">
@@ -400,7 +400,7 @@
 									<th scope="col">Blue 3</th>
 								</tr>
 							</thead>
-							<tbody data-bind="foreach: current_event().matches">
+							<tbody data-bind="foreach: matches">
 								<tr>
 									<th scope="row" data-bind="text: match_number"></th>
 									<td data-bind="text: match_time.formatted"></td>

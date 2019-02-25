@@ -5,8 +5,6 @@ class AppState {
 		let stored_events = JSON.parse(localStorage.getItem('events') || null);
 		let stored_current_event = JSON.parse(localStorage.getItem('current_event') || null);
 
-		this.default_event = !stored_current_event;
-
 		if (stored_events) {
 			this.events = ko.observableArray(stored_events.map(event => new Event(event)));
 		} else {
@@ -15,7 +13,6 @@ class AppState {
 
 		this.current_event = ko.observable(this.findEvent(stored_current_event) || undefined);
 		this.current_event.subscribe((event) => {
-			this.default_event = false;
 			localStorage.setItem('current_event', JSON.stringify({
 				event_key: event.event_key(),
 				event_year: event.event_year()

@@ -4,7 +4,7 @@ function initPages() {
 	$('.js-splash-screen').remove();
 	$('body').removeClass('is-app-loading');
 
-	if (window.app_state.default_event) {
+	if (!window.app_state.current_event()) {
 		//$('[data-role="page"]#event_select').show();
 		window.app_state.event_signup
 			.showSignup()
