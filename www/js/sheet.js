@@ -26,6 +26,8 @@ const LOCATION_MAPPING = [
 	'Rocket Level 3'
 ];
 
+const SERIALIZATION_DELIMITER = '*';
+
 class Action {
 	constructor(action = {}) {
 		this.action_name = ko.observable(action.action_name);
@@ -94,5 +96,50 @@ class Sheet {
 
 	removeDefenseInteraction() {
 		this.defense_count(Math.max(this.defense_count() - 1, 0));
+	}
+
+	padInt(int, size) {
+		if ($.isNumeric(int)) {
+			return parseInt(int).toString().padStart(size, '0');
+		}
+
+		return new Array(size + 1).join(' ');
+	}
+	serializeSheet() {
+		let stream = [];
+		stream.push((this.scout_name() || '').slice(0, 30)); // TODO: SANITIZE
+		stream.push(SERIALIZATION_DELIMITER);
+		stream.push((this.event_key() || '').slice(0, 8));
+		stream.push(SERIALIZATION_DELIMITER);
+
+		stream = stream.concat([
+			[this.event_year(), 4],
+			[this.match_number(), 3],
+			[this.match_level(), 1],
+			[this.team_number(), 4],
+			[this.alliance(), 1],
+			[this.starts_with(), 1],
+			[this.auton_bonus(), 1],
+			[this.auton_mobility(), 1],
+			[this.defense_count(), 3],
+			[this.end_platform(), 1],
+			[this.climb_speed(), 1],
+			[this.carried() ? 1 : 0, 1],
+			[this.robot_speed(), 1]
+		].map(part => this.padInt.apply(null, part)));
+
+		stream.push(SERIALIZATION_DELIMITER);
+
+		stream = stream.concat(this.action_menu.actions().map(action => [
+			this.padInt(action.action_name(), 1),
+			this.padInt(action.game_piece(), 1),
+			this.padInt(action.location(), 1)
+		]).flat());
+
+		stream.push(SERIALIZATION_DELIMITER);
+
+		stream.push(this.comments());
+
+		return stream.join('');
 	}
 }
