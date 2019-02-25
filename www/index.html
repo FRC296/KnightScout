@@ -130,7 +130,7 @@
 								<div class="form-group col">
 									<label for="scout_match_level">Match Level</label>
 									<select id="scout_match_level" class="custom-select" data-bind="value: match_level">
-										<option selected disabled>Select Level</option>
+										<option value="" selected disabled>Select Level</option>
 										<option value="2">Practice</option>
 										<option value="0">Qualification</option>
 										<option value="1">Playoff</option>
@@ -146,7 +146,7 @@
 								<div class="form-group col">
 									<label for="scout_match_alliance">Alliance</label>
 									<select id="scout_match_alliance" class="custom-select" data-bind="value: alliance">
-										<option selected disabled>Select Level</option>
+										<option value="" selected disabled>Select Alliance</option>
 										<option value="0">Blue</option>
 										<option value="1">Red</option>
 									</select>
@@ -156,7 +156,7 @@
 							<div class="form-group">
 								<label for="scout_match_start_piece">Starts with</label>
 								<select id="scout_match_start_piece" class="custom-select" data-bind="value: starts_with">
-									<option selected disabled>Select Piece</option>
+									<option value="" selected disabled>Select Piece</option>
 									<option value="1">Hatch</option>
 									<option value="0">Cargo</option>
 									<option value="2">Nothing</option>
@@ -165,7 +165,7 @@
 							<div class="form-group">
 								<label for="scout_match_start_piece">Sandstorm Bonus</label>
 								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_bonus">
-									<option selected disabled>Select Bonus</option>
+									<option value="" selected disabled>Select Bonus</option>
 									<option value="1">Launched from level 1</option>
 									<option value="2">Launched from level 2</option>
 									<option value="0">Didn't pass HAB line</option>
@@ -177,7 +177,7 @@
 							<div class="form-group">
 								<label for="scout_match_start_piece">Sandstorm Mobility</label>
 								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_mobility">
-									<option selected disabled>Select Mobility</option>
+									<option value="" selected disabled>Select Mobility</option>
 									<option value="0">Didn't move</option>
 									<option value="1">Derpy movement</option>
 									<option value="2">Moves but doesn't do anything</option>
@@ -312,7 +312,7 @@
 								<div class="form-group col-6 col-md-5">
 									<label for="scout_match_end_platform">End Platform</label>
 									<select id="scout_match_end_platform" class="custom-select" data-bind="value: end_platform">
-										<option selected disabled>Select Platform</option>
+										<option value="" selected disabled>Select Platform</option>
 										<option value="0">Didn't make it to platform</option>
 										<option value="1">Level 1</option>
 										<option value="2">Level 2</option>
@@ -323,7 +323,7 @@
 								<div class="form-group col-6 col-md-5">
 									<label for="scout_match_climb_speed">Climb Speed</label>
 									<select id="scout_match_climb_speed" class="custom-select" data-bind="value: climb_speed">
-										<option selected disabled>Select Speed</option>
+										<option value="" selected disabled>Select Speed</option>
 										<option value="0">Didn't climb</option>
 										<option value="1">1-3 seconds</option>
 										<option value="2">3-10 seconds</option>
@@ -344,7 +344,7 @@
 							<div class="form-group">
 								<label for="scout_match_speed">Robot Speed</label>
 								<select id="scout_match_speed" class="custom-select" data-bind="value: robot_speed">
-									<option selected disabled>Select Speed</option>
+									<option value="" selected disabled>Select Speed</option>
 									<option value="0">1 - Slow</option>
 									<option value="1">2</option>
 									<option value="2">3</option>
@@ -402,7 +402,7 @@
 							<tbody data-bind="foreach: current_event().matches">
 								<tr>
 									<th scope="row" data-bind="text: match_number"></th>
-									<td data-bind="text: match_time_formatted"></td>
+									<td data-bind="text: match_time.formatted"></td>
 									<td data-bind="text: red1"></td>
 									<td data-bind="text: red2"></td>
 									<td data-bind="text: red3"></td>
