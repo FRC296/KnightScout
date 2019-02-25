@@ -188,7 +188,25 @@ class Sheet {
 				actions: actions
 			}
 		});
+	}
 
+	createQRcode() {
+		let $qr_code = $('.js-qr-code');
+		let data = this.serializeSheet();
 
+		$qr_code.empty();
+
+		let best_height = Math.min(window.innerHeight, window.innerWidth, 1140) * 0.8;
+
+		let qrcode = new QRCode($qr_code[0], {
+			text: data,
+			width: best_height,
+			height: best_height,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		});
+
+		$('#qr_code_display').modal();
 	}
 }

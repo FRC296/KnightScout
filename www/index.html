@@ -90,7 +90,7 @@
 									<td data-bind="text: action_menu.actions().length"></td>
 									<td data-bind="text: defense_count"></td>
 									<td><button class="btn btn-warning" data-bind="click: $parent.editSheet">Edit</button></td>
-									<td></td>
+									<td><button class="btn btn-success" data-bind="click: createQRcode">QR Code</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -487,6 +487,22 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="qr_code_display" tabindex="-1" role="dialog"aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						Scout sheet QR code
+					</div>
+					<div class="modal-body">
+						<div class="js-qr-code"></div>
+					</div>
+					<div class="modal-footer">
+							<button type="submit" class="btn btn-success" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<script type="text/javascript" src="cordova.js"></script>
 
 		<script type="text/javascript" src="js/vendor/jquery-3.3.1.min.js"></script>
@@ -495,6 +511,7 @@
 		<script type="text/javascript" src="js/vendor/knockout-3.4.2.js"></script>
 		<script type="text/javascript" src="js/vendor/moment.js"></script>
 		<script type="text/javascript" src="js/vendor/bootbox.min.js"></script>
+		<script type="text/javascript" src="js/vendor/qrcode.min.js"></script>
 
 		<script type="text/javascript" src="js/private.js"></script>
 		<script type="text/javascript" src="js/globals.js"></script>
