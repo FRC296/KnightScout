@@ -142,4 +142,53 @@ class Sheet {
 
 		return stream.join('');
 	}
+
+	static deserializeBlobPart(part) {
+		if ($.isNumeric(part)) {
+			return parseInt(part).toString();
+		}
+		return '';
+	}
+
+	static deserializeSheet(stream) {
+		let stream_parts = stream.split('*');
+		let blob = stream_parts[2];
+		let action_blob = stream_parts[3];
+
+		let actions = [];
+
+		for (var i = 0; i < action_blob.length; i=i+3) {
+			actions.push({
+				action_name: parseInt(action_blob[i]),
+				game_piece: parseInt(action_blob[i + 1]),
+				location: parseInt(action_blob[i + 2])
+			});
+		}
+
+		let f = Sheet.deserializeBlobPart;
+
+		return new Sheet({
+			scout_name: stream_parts[0],
+			event_key: stream_parts[1],
+			event_year: f(blob.slice(0, 4)),
+			match_number: f(blob.slice(4, 7)),
+			match_level: f(blob.slice(7, 8)),
+			team_number: f(blob.slice(8, 12)),
+			alliance: f(blob.slice(12, 13)),
+			starts_with: f(blob.slice(13, 14)),
+			auton_bonus: f(blob.slice(14, 15)),
+			auton_mobility: f(blob.slice(15, 16)),
+			defense_count: f(blob.slice(16, 19)),
+			end_platform: f(blob.slice(19, 20)),
+			climb_speed: f(blob.slice(20, 21)),
+			carried: parseInt(blob.slice(21, 22)) > 1,
+			robot_speed: f(blob.slice(22, 23)),
+			comments: stream_parts[4],
+			action_menu: {
+				actions: actions
+			}
+		});
+
+
+	}
 }
