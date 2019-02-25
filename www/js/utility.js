@@ -19,3 +19,50 @@ function calculateUsedStorage() {
 
 	return (_lsTotal / 1024).toFixed(2) + " KB";
 }
+
+$('.js-delete-event-info').on('click', () => {
+	bootbox.confirm({
+		message: "Are you sure you want to delete all event information? This encompasses events and matches.",
+		backdrop: true,
+		buttons: {
+			confirm: {
+				label: 'Yes',
+				className: 'btn-danger'
+			},
+			cancel: {
+				label: 'No',
+				className: 'btn-primary'
+			}
+		},
+		callback: function (result) {
+			if (result) {
+				localStorage.removeItem('events');
+				localStorage.removeItem('current_event');
+				location.reload()
+			}
+		}
+	});
+});
+
+$('.js-delete-scout-info').on('click', () => {
+	bootbox.confirm({
+		message: "Are you sure you want to delete all scout information? This includes all your scout sheets!",
+		backdrop: true,
+		buttons: {
+			confirm: {
+				label: 'Yes',
+				className: 'btn-danger'
+			},
+			cancel: {
+				label: 'No',
+				className: 'btn-primary'
+			}
+		},
+		callback: function (result) {
+			if (result) {
+				localStorage.removeItem('scout');
+				location.reload()
+			}
+		}
+	});
+});
