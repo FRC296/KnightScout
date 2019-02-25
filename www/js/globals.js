@@ -52,4 +52,17 @@ class AppState {
 	showEventSignup() {
 		this.event_signup.showSignup(ko.toJS(this.current_event()));
 	}
+
+	scanSheet() {
+		cordova.plugins.barcodeScanner.scan(
+			result => {
+				bootbox.alert("Receiving info: " + result.text, () => {
+					this.scout.sheets.push(Sheet.deserializeSheet(result.text));
+				});
+			},
+			error => {
+				bootbox.alert("QR Code Scan Failed");
+			}
+		);
+	}
 }

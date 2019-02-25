@@ -359,12 +359,12 @@
 				</div>
 			</div>
 		</section>
-		<section class="o-page" data-role="page" id="collect-page">
+		<section class="o-page js-bind-app-state" data-role="page" id="collect-page">
 			<div class="container">
 				<div class="jumbotron">
 					<h1>Welcome Collector!</h1>
 					<br>
-					<button class="btn btn-success btn-lg js-scan-report">Scan Report</button>
+					<button class="btn btn-success btn-lg" data-bind="click: scanSheet">Scan Report</button>
 				</div>
 				<h2>Latest Results</h2>
 				<div>
@@ -497,7 +497,7 @@
 						<div class="js-qr-code"></div>
 					</div>
 					<div class="modal-footer">
-							<button type="submit" class="btn btn-success" data-dismiss="modal">Ok</button>
+						<button type="submit" class="btn btn-success" data-dismiss="modal">Ok</button>
 					</div>
 				</div>
 			</div>

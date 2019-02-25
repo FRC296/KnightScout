@@ -11,4 +11,6 @@
     <access origin="*" />
 
     <preference name="phonegap-version" value="cli-8.1.1" />
+
+    <plugin name="phonegap-plugin-barcodescanner" />
 </widget>

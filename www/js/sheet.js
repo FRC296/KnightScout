@@ -181,7 +181,7 @@ class Sheet {
 			defense_count: f(blob.slice(16, 19)),
 			end_platform: f(blob.slice(19, 20)),
 			climb_speed: f(blob.slice(20, 21)),
-			carried: parseInt(blob.slice(21, 22)) > 1,
+			carried: parseInt(blob.slice(21, 22)) > 0,
 			robot_speed: f(blob.slice(22, 23)),
 			comments: stream_parts[4],
 			action_menu: {
