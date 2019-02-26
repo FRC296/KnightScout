@@ -194,6 +194,9 @@ class Sheet {
 		let $qr_code = $('.js-qr-code');
 		let data = this.serializeSheet();
 
+		console.log('QR encoding:', data);
+		console.log('Length', data.length);
+
 		$qr_code.empty();
 
 		let best_height = Math.min(window.innerHeight, window.innerWidth, 1140) * 0.8;
