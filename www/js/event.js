@@ -8,7 +8,10 @@ class EventSignup {
 
 	showSignup(event) {
 		if (event) {
-			this.event(new Event(event));
+			this.event(new Event({
+				event_key: event.event_key,
+				event_year: event.event_year
+			}));
 		}
 		this.$signup_modal.modal({
 			keyboard: false,
@@ -38,7 +41,7 @@ class Event {
 	constructor(event = {}) {
 		this.event_key = ko.observable(event.event_key || '');
 		this.event_year = ko.observable(event.event_year || 2019);
-		this.matches = ko.observableArray();
+		this.matches = ko.observableArray(event.matches ? event.matches.map(match => new Match(match)) : []);
 		this.teams = ko.observableArray();
 	}
 
@@ -53,6 +56,7 @@ class Event {
 			let matches = JSON.parse(response);
 			console.log(matches);
 			this.matches(matches.Schedule.map(match => BuildMatch(match)));
+			$(document).trigger('persist_events');
 		});
 	}
 }
