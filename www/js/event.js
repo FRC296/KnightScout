@@ -57,6 +57,8 @@ class Event {
 			console.log(matches);
 			this.matches(matches.Schedule.map(match => BuildMatch(match)));
 			$(document).trigger('persist_events');
+		}).fail(error => {
+			bootbox.alert("Download Failed! " + JSON.stringify(error));
 		});
 	}
 }
