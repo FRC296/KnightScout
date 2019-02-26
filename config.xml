@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.netopyaplanet.knightscout" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.netopyaplanet.knightscout" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>KnightScout</name>
     <description>
-        A blank PhoneGap app.
+        FRC team 296: The Northern Knight's very own scouting application!
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
@@ -16,6 +16,10 @@
         <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="overwrite">
             <string>Camera access is used to scan QR codes containing scouting information</string>
         </edit-config>
+    </platform>
+
+    <platform name="android">
+        <icon density="xxxhdpi" src="www/res/icon/rad_icon_192.png" />
     </platform>
 
     <preference name="phonegap-version" value="cli-8.1.1" />
