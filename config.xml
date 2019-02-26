@@ -10,6 +10,14 @@
     <content src="index.html" />
     <access origin="*" />
 
+    <platform name="ios">
+        <icon height="1024" platform="ios" src="www/res/icon/rad_icon.png" width="1024" />
+
+        <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="overwrite">
+            <string>Camera access is used to scan QR codes containing scouting information</string>
+        </edit-config>
+    </platform>
+
     <preference name="phonegap-version" value="cli-8.1.1" />
 
     <plugin name="phonegap-plugin-barcodescanner" />
