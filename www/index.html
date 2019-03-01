@@ -273,6 +273,7 @@
 												<th scope="col">Action</th>
 												<th scope="col">Game Piece</th>
 												<th scope="col">Location</th>
+												<th scope="col"></th>
 											</tr>
 										</thead>
 										<tbody data-bind="foreach: actions">
@@ -280,6 +281,7 @@
 												<td data-bind="text: action_name.formatted"></td>
 												<td data-bind="text: game_piece.formatted"></td>
 												<td data-bind="text: location.formatted"></td>
+												<td class="recorded-action__delete"><button class="btn btn-danger btn-sm" data-bind="click: $parent.deleteAction">Delete</button></td>
 											</tr>
 										</tbody>
 									</table>

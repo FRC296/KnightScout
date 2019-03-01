@@ -45,6 +45,11 @@ class ActionMenu {
 		this.current_action = ko.observable(new Action());
 		this.actions = ko.observableArray((action_menu.actions || []).map(action => new Action(action)));
 		this.current_menu = ko.observable('home');
+
+		let self = this;
+		this.deleteAction = function() {
+			self.actions.remove(this);
+		}
 	}
 
 	cancel() {
