@@ -12,6 +12,28 @@ class Scout {
 			window.goToPage('scout-sheet');
 		}
 
+		this.deleteSheet = function() {
+			bootbox.confirm({
+				message: "Are you sure you want to delete this sheet?",
+				backdrop: true,
+				buttons: {
+					confirm: {
+						label: 'Yes',
+						className: 'btn-danger'
+					},
+					cancel: {
+						label: 'No',
+						className: 'btn-primary'
+					}
+				},
+				callback: (result) => {
+					if (result) {
+						self.sheets.remove(this);
+					}
+				}
+			});
+		}
+
 		this.scout_name.subscribe(() => {
 			$(document).trigger('persist_scout');
 		});
@@ -26,12 +48,10 @@ class Scout {
 	}
 
 	submitSheet() {
-		this.sheets.push(this.current_sheet());
+		if (this.sheets.indexOf(this.current_sheet()) < 0) {
+			this.sheets.push(this.current_sheet());
+		}
 		this.current_sheet(new Sheet(ko.toJS(window.app_state.current_event)));
 		window.goToPage('scout-page');
-	}
-
-	deleteSheet() {
-
 	}
 }
