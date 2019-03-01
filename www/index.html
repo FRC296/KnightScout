@@ -79,8 +79,9 @@
 									<th scope="col">Team</th>
 									<th scope="col">Actions</th>
 									<th scope="col">Defense</th>
-									<th scope="col">Edit</th>
 									<th scope="col">QR Code</th>
+									<th scope="col">Edit</th>
+									<th scope="col">Delete</th>
 								</tr>
 							</thead>
 							<tbody data-bind="foreach: sheets">
@@ -89,8 +90,9 @@
 									<td data-bind="text: team_number"></td>
 									<td data-bind="text: action_menu.actions().length"></td>
 									<td data-bind="text: defense_count"></td>
-									<td><button class="btn btn-warning" data-bind="click: $parent.editSheet">Edit</button></td>
 									<td><button class="btn btn-success" data-bind="click: createQRcode">QR Code</button></td>
+									<td><button class="btn btn-warning" data-bind="click: $parent.editSheet">Edit</button></td>
+									<td><button class="btn btn-danger btn-sm" data-bind="click: $parent.deleteSheet">Delete</button></td>
 								</tr>
 							</tbody>
 						</table>
