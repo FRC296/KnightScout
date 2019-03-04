@@ -2,6 +2,28 @@ $('.js-backup-scout-data').on('click', () => {
 	$('.js-backup-output').text(ko.toJSON(app_state.scout.sheets));
 });
 
+$('.js-copy-scout-data').on('click', () => {
+	var textArea = $('.js-backup-output')[0];
+
+	function isiOS() {
+		return navigator.userAgent.match(/ipad|iphone/i);
+	}
+
+	if (isiOS()) {
+		console.log('ios selection');
+		var range, selection;
+
+		range = document.createRange();
+		range.selectNodeContents(textArea);
+		selection = window.getSelection();
+		selection.removeAllRanges();
+		selection.addRange(range);
+		textArea.setSelectionRange(0, textArea.value.length);
+	} else {
+		textArea.select();
+	}
+});
+
 $('.js-max-integer').text(Number.MAX_SAFE_INTEGER);
 
 $('.js-storage-usage').text(calculateUsedStorage());
