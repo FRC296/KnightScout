@@ -196,25 +196,54 @@ class Sheet {
 	}
 
 	createQRcode() {
+
+		console.log('Creating QR code');
+
 		let $qr_code = $('.js-qr-code');
-		let data = this.serializeSheet();
+		let $modal = $('#qr_code_display');
+
+		console.log('Serialize Sheet!');
+
+		let data = {};
+
+		try {
+			data = this.serializeSheet();
+		} catch(error) {
+			bootbox.alert('Serialization Failed. Error:' + JSON.stringify(error));
+			console.log('Serialization Failed', JSON.stringify(error));
+			return;
+		}
 
 		console.log('QR encoding:', data);
 		console.log('Length', data.length);
 
 		$qr_code.empty();
 
-		let best_height = Math.min(window.innerHeight, window.innerWidth, 1140) * 0.8;
+		if (data.length > 1273) {
+			bootbox.alert('Scout sheet contains too much data! Try making your comments more concise.');
+			return;
+		}
 
-		let qrcode = new QRCode($qr_code[0], {
-			text: data,
-			width: best_height,
-			height: best_height,
-			colorDark : "#000000",
-			colorLight : "#ffffff",
-			correctLevel : QRCode.CorrectLevel.H
-		});
+		let modal_width = (parseInt($('.modal-lg', $modal).css('max-width').replace('px', '')) || 1140);
 
-		$('#qr_code_display').modal();
+		let best_height = Math.min(window.innerHeight * 0.8, window.innerWidth * 0.8, modal_width * 0.9);
+
+		try {
+			let qrcode = new QRCode($qr_code[0], {
+				text: data,
+				width: best_height,
+				height: best_height,
+				colorDark : "#000000",
+				colorLight : "#ffffff",
+				correctLevel : QRCode.CorrectLevel.H
+			});
+	
+			$modal.modal();
+		} catch (error) {
+			debugger;
+			console.log('QR Code error', error);
+			bootbox.alert('Failed to generate QR code. Error: ' + JSON.stringify(error));
+		}
+		
 	}
 }

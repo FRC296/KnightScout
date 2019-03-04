@@ -23,3 +23,11 @@
 .recorded-action__delete {
 	text-align: right;
 }
+
+.bootbox .modal-body {
+	overflow-wrap: break-word;
+}
+
+#qr_code_display img {
+	margin: 0 auto;
+}
