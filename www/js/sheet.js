@@ -92,6 +92,8 @@ class Sheet {
 		this.robot_speed = ko.observable(sheet_data.robot_speed);
 		this.comments = ko.observable(sheet_data.comments);
 
+		this.submitted = ko.observable(!!sheet_data.submitted);
+
 		this.action_menu = new ActionMenu(sheet_data.action_menu);
 	}
 

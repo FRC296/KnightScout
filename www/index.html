@@ -67,7 +67,7 @@
 				<div class="jumbotron">
 					<h1>Welcome Scout!</h1>
 					<br>
-					<a class="btn btn-success btn-lg" href="#scout-sheet" role="button">Scout a match</a>
+					<button class="btn btn-success btn-lg" data-bind="click: scoutMatch">Scout a match</button>
 				</div>
 				<div class="row">
 					<div class="col">
@@ -104,8 +104,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm">
-						<h1>Scout Sheet</h1>
 						<form data-bind="with: current_sheet()">
+							<h1>Scout Sheet <span class="badge badge-success" data-bind="ifnot: submitted">New</span><span class="badge badge-warning" data-bind="if: submitted">Edit</span></h1>
 							<h2>Match Information</h2>
 							<div class="form-group">
 								<label for="scout_name">Scout Name</label>
@@ -357,8 +357,10 @@
 								<label>Comments</label>
 								<textarea class="form-control" id="scout_match_notes" rows="5" data-bind="value: comments"></textarea>
 							</div>
+							<button class="btn btn-success" type="button" data-bind="click: $parent.submitSheet.bind($parent)">
+								<span data-bind="ifnot: submitted">Submit Scout Sheet</span><span data-bind="if: submitted">Save Scout Sheet</span>
+							</button>
 						</form>
-						<button class="btn btn-success" data-bind="click: submitSheet">Submit Scout Sheet</button>
 					</div>
 				</div>
 			</div>
