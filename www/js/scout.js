@@ -61,10 +61,15 @@ class Scout {
 		window.goToPage('scout-page');
 	}
 
-	newSheet() {
-		if (this.current_sheet().submitted()) {
-			this.current_sheet(new Sheet(ko.toJS(window.app_state.current_event)));
+	newSheet(force, match_info) {
+		if (this.current_sheet().submitted() || force) {
+			let event_info = ko.toJS(window.app_state.current_event);
+			let sheet_info = $.extend({}, event_info, match_info);
+			this.current_sheet(new Sheet(sheet_info));
 		}
 		$(document).trigger('persist_scout');
+	}
+	clearSheet() {
+		this.newSheet(true);
 	}
 }

@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-grid.min.css" />
 
 		<link rel="stylesheet" type="text/css" href="css/pages.css" />
+		<link rel="stylesheet" type="text/css" href="css/event.css" />
 	</head>
 	<body class="is-app-loading">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark js-navbar">
@@ -106,6 +107,7 @@
 					<div class="col-sm">
 						<form data-bind="with: current_sheet()">
 							<h1>Scout Sheet <span class="badge badge-success" data-bind="ifnot: submitted">New</span><span class="badge badge-warning" data-bind="if: submitted">Edit</span></h1>
+							<button class="btn btn-danger btn-sm" type="button" data-bind="click: $parent.newSheet.bind($parent)">Clear Sheet</button>
 							<h2>Match Information</h2>
 							<div class="form-group">
 								<label for="scout_name">Scout Name</label>
@@ -403,15 +405,15 @@
 								</tr>
 							</thead>
 							<tbody data-bind="foreach: matches">
-								<tr>
+								<tr class="match">
 									<th scope="row" data-bind="text: match_number"></th>
 									<td data-bind="text: match_time.formatted"></td>
-									<td data-bind="text: red1"></td>
-									<td data-bind="text: red2"></td>
-									<td data-bind="text: red3"></td>
-									<td data-bind="text: blue1"></td>
-									<td data-bind="text: blue2"></td>
-									<td data-bind="text: blue3"></td>
+									<td class="match-red"><a href="#" data-bind="text: red1, click: scoutMatch.bind($data, $data.red1, 1)"></a></td>
+									<td class="match-red"><a href="#" data-bind="text: red2, click: scoutMatch.bind($data, $data.red2, 1)"></a></td>
+									<td class="match-red"><a href="#" data-bind="text: red3, click: scoutMatch.bind($data, $data.red3, 1)"></a></td>
+									<td class="match-blue"><a href="#" data-bind="text: blue1, click: scoutMatch.bind($data, $data.blue1, 0)"></a></td>
+									<td class="match-blue"><a href="#" data-bind="text: blue2, click: scoutMatch.bind($data, $data.blue2, 0)"></a></td>
+									<td class="match-blue"><a href="#" data-bind="text: blue3, click: scoutMatch.bind($data, $data.blue3, 0)"></a></td>
 								</tr>
 							</tbody>
 						</table>

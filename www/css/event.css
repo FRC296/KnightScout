@@ -1,0 +1,12 @@
+.match:nth-child(odd) .match-red {
+	background-color: #fee;
+}
+.match:nth-child(odd) .match-blue {
+	background-color: #eef;
+}
+.match:nth-child(even) .match-red {
+	background-color: #fdd;
+}
+.match:nth-child(even) .match-blue {
+	background-color: #ddf;
+}
