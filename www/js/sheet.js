@@ -71,8 +71,6 @@ class ActionMenu {
 
 class Sheet {
 	constructor(sheet_data = {}) {
-		console.log(sheet_data);
-	
 		this.scout_name = ko.observable(sheet_data.scout_name);
 		this.event_key = ko.observable(sheet_data.event_key);
 		this.event_year = ko.observable(sheet_data.event_year);
