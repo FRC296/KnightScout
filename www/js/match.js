@@ -10,13 +10,24 @@ class Match {
 		this.blue2 = event_info.blue2 || 0;
 		this.blue3 = event_info.blue3 || 0;
 
-		let level_key = event_info.tournament_level ? TOURNAMENT_LEVELS.indexOf(event_info.tournament_level) : -1;
-		this.tournament_level = level_key > -1 ? level_key : '';
+		this.tournament_level = $.isNumeric(event_info.tournament_level) ? event_info.tournament_level : '';
+	}
+
+	scoutMatch(team, alliance) {
+		app_state.scout.newSheet(true, {
+			match_number: this.match_number.toString(),
+			match_level: this.tournament_level.toString(),
+			team_number: team,
+			alliance: alliance
+		});
+		window.goToPage('scout-sheet');
 	}
 }
 
 function BuildMatch(match_info) {
 	let station_teams = MatchTeamArrayToStations(match_info.teams);
+	let level_key = match_info.tournamentLevel ? TOURNAMENT_LEVELS.indexOf(match_info.tournamentLevel) : -1;
+
 	return new Match({
 		match_number: match_info.matchNumber,
 		match_time: new Date(match_info.startTime),
@@ -26,7 +37,7 @@ function BuildMatch(match_info) {
 		blue1: station_teams.blue1,
 		blue2: station_teams.blue2,
 		blue3: station_teams.blue3,
-		tournament_level: match_info.tournamentLevel
+		tournament_level: level_key > -1 ? level_key : ''
 	});
 }
 

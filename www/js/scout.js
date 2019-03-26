@@ -47,11 +47,29 @@ class Scout {
 		});
 	}
 
+	scoutMatch() {
+		this.newSheet();
+		window.goToPage('scout-sheet');
+	}
+
 	submitSheet() {
 		if (this.sheets.indexOf(this.current_sheet()) < 0) {
 			this.sheets.push(this.current_sheet());
 		}
-		this.current_sheet(new Sheet(ko.toJS(window.app_state.current_event)));
+		this.current_sheet().submitted(true);
+		this.newSheet();
 		window.goToPage('scout-page');
+	}
+
+	newSheet(force, match_info) {
+		if (this.current_sheet().submitted() || force) {
+			let event_info = ko.toJS(window.app_state.current_event);
+			let sheet_info = $.extend({}, event_info, match_info);
+			this.current_sheet(new Sheet(sheet_info));
+		}
+		$(document).trigger('persist_scout');
+	}
+	clearSheet() {
+		this.newSheet(true);
 	}
 }
