@@ -374,10 +374,164 @@
 					<h1>Welcome Collector!</h1>
 					<br>
 					<button class="btn btn-success btn-lg" data-bind="click: scanSheet">Scan Report</button>
+					<button class="btn btn-primary btn-lg" data-bind="click: scout.calculateAllTeamStatistics.bind(scout)">Calculate Stats</button>
 				</div>
-				<h2>Latest Results</h2>
+				<h2>Team Statistics</h2>
 				<div>
-					<table class="js-results-table"></table>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="start-tab" data-toggle="tab" href="#start" role="tab" aria-controls="start" aria-selected="true">Start</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="teleop-tab" data-toggle="tab" href="#teleop" role="tab" aria-controls="teleop" aria-selected="false">Teleop</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="end-game-tab" data-toggle="tab" href="#end-game" role="tab" aria-controls="end-game" aria-selected="false">End Game</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="start" role="tabpanel" aria-labelledby="start-tab">
+							<br/>
+							<table class="table table-sm table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Team</th>
+										<th scope="col">#</th>
+										<th scope="col" colspan="3">Starts</th>
+										<th scope="col" colspan="2">Auton</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th></th>
+										<th>H</th>
+										<th>C</th>
+										<th>N</th>
+										<th>B</th>
+										<th>S</th>
+									</tr>
+								</thead>
+								<tbody data-bind="foreach: scout.team_stats()">
+									<tr>
+										<td data-bind="text: team_number"></td>
+										<td data-bind="text: matches_scouted"></td>
+										<td data-bind="text: starts_hatch.formatted()"></td>
+										<td data-bind="text: starts_cargo.formatted()"></td>
+										<td data-bind="text: starts_nothing.formatted()"></td>
+										<td data-bind="text: auton_bonus_score.formatted()"></td>
+										<td data-bind="text: auton_mobility_score.formatted()"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane fade" id="teleop" role="tabpanel" aria-labelledby="teleop-tab">
+							<br/>
+							<table class="table table-sm table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Team</th>
+										<th scope="col">#</th>
+										<th scope="col">Def</th>
+									</tr>
+								</thead>
+								<tbody data-bind="foreach: scout.team_stats()">
+									<tr>
+										<td data-bind="text: team_number"></td>
+										<td data-bind="text: matches_scouted"></td>
+										<td data-bind="text: avg_defense_counts.formatted()"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane fade" id="end-game" role="tabpanel" aria-labelledby="end-game-tab">
+							<br/>
+							<table class="table table-sm table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Team</th>
+										<th scope="col">#</th>
+										<th scope="col" colspan="4">End</th>
+										<th scope="col" colspan="2">Climb</th>
+										<th scope="col">RS</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th></th>
+										<th>F</th>
+										<th>1</th>
+										<th>2</th>
+										<th>3</th>
+										<th>S</th>
+										<th>C</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody data-bind="foreach: scout.team_stats()">
+									<tr>
+										<td data-bind="text: team_number"></td>
+										<td data-bind="text: matches_scouted"></td>
+										<td data-bind="text: end_fail.formatted()"></td>
+										<td data-bind="text: end_lvl1.formatted()"></td>
+										<td data-bind="text: end_lvl2.formatted()"></td>
+										<td data-bind="text: end_lvl3.formatted()"></td>
+										<td data-bind="text: climb_speed_score.formatted()"></td>
+										<td data-bind="text: carry_score.formatted()"></td>
+										<td data-bind="text: robot_speed_score.formatted()"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!---
+					<table class="table table-sm table-striped">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Team</th>
+								<th scope="col">#</th>
+								<th scope="col" colspan="3">Starts</th>
+								<th scope="col" colspan="2">Auton</th>
+								<th scope="col">Def</th>
+								<th scope="col" colspan="4">End</th>
+								<th scope="col" colspan="2">Climb</th>
+								<th scope="col">RS</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th>H</th>
+								<th>C</th>
+								<th>N</th>
+								<th>B</th>
+								<th>S</th>
+								<th></th>
+								<th>F</th>
+								<th>1</th>
+								<th>2</th>
+								<th>3</th>
+								<th>S</th>
+								<th>C</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody data-bind="foreach: scout.team_stats()">
+							<tr>
+								<td data-bind="text: team_number"></td>
+								<td data-bind="text: matches_scouted"></td>
+								<td data-bind="text: starts_hatch.formatted()"></td>
+								<td data-bind="text: starts_cargo.formatted()"></td>
+								<td data-bind="text: starts_nothing.formatted()"></td>
+								<td data-bind="text: auton_bonus_score.formatted()"></td>
+								<td data-bind="text: auton_mobility_score.formatted()"></td>
+								<td data-bind="text: avg_defense_counts.formatted()"></td>
+								<td data-bind="text: end_fail.formatted()"></td>
+								<td data-bind="text: end_lvl1.formatted()"></td>
+								<td data-bind="text: end_lvl2.formatted()"></td>
+								<td data-bind="text: end_lvl3.formatted()"></td>
+								<td data-bind="text: climb_speed_score.formatted()"></td>
+								<td data-bind="text: carry_score.formatted()"></td>
+								<td data-bind="text: robot_speed_score.formatted()"></td>
+							</tr>
+						</tbody>
+					</table>-->
 				</div>
 			</div>
 		</section>
@@ -547,3 +701,4 @@
 		</script>
 	</body>
 </html>
+

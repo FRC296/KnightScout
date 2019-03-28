@@ -5,6 +5,7 @@ class Scout {
 		this.scout_name = ko.observable(stored_scout && stored_scout.scout_name || '');
 		this.current_sheet = ko.observable(new Sheet(ko.toJS(app_state.current_event)));
 		this.sheets = ko.observableArray(((stored_scout && stored_scout.sheets) || []).map(sheet => new Sheet(sheet)));
+		this.team_stats = ko.observableArray();
 
 		let self = this;
 		this.editSheet = function() {
@@ -88,28 +89,13 @@ class Scout {
 			stats.push(this.calculateTeamStatistics(team, team_sheets[team]));
 		}
 
-		console.log(stats);
+		this.team_stats(stats);
 
 		return stats;
-
 	}
-	/*incrementObservable(observable, condition) {
-		if (condition === false) {
-			return;
-		}
-		observable(observable() + 1);
-	}*/
+
 	calculateTeamStatistics(team, sheets) {
 		let team_results = sheets.reduce((acc, sheet) => {
-			/*this.incrementObservable(acc.matches_scouted);
-
-			let starts_with = parseInt(sheet.starts_with());
-
-			this.incrementObservable(acc.starts_hatch, starts_with === 1);
-			this.incrementObservable(acc.starts_cargo, starts_with === 0);
-			this.incrementObservable(acc.starts_nothing, starts_with === 2);
-
-			this.auton_bonus_score(this.auton_bonus_score() + sheet.)*/
 
 			let starts_with = parseInt(sheet.starts_with());
 			switch (starts_with) {
@@ -141,7 +127,7 @@ class Scout {
 
 			acc.avg_defense_counts += parseInt(sheet.defense_count()) || 0;
 
-			let end_score = parseInt(sheet.end_platform);
+			let end_score = parseInt(sheet.end_platform());
 			switch (end_score) {
 				case 0:
 					++acc.end_fail;
@@ -165,7 +151,7 @@ class Scout {
 			acc.carry_score += ~~sheet.carried();
 
 			let robot_speed = parseInt(sheet.robot_speed());
-			if (!isNaN) {
+			if (!isNaN(robot_speed)) {
 				acc.robot_speed_score += robot_speed;
 				++acc.robot_speed_count;
 			}
