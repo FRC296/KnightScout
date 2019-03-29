@@ -156,6 +156,75 @@ class Scout {
 				++acc.robot_speed_count;
 			}
 
+			let actions = sheet.action_menu.actions();
+
+			/*for (let action in actions) {
+				let action_name = action.action_name();
+				let game_piece = action.game_piece();
+				let location = action.location();
+
+				// Pickup
+				if (action_name === 0) {
+					let pickup_stat_prefix = 'pickup_' + GAME_PIECE_STAT_MAPPING[game_piece];
+					++acc[pickup_stat_prefix + '_count'];
+				// Dropoff
+				} else if (action_name === 1){
+
+				}
+			}*/
+
+			let action_results = actions.reduce((acc, action) => {
+				let action_name = action.action_name();
+				let game_piece = action.game_piece();
+				let location = action.location();
+
+				++acc[ACTION_STAT_MAPPING[action_name] + '_' + GAME_PIECE_STAT_MAPPING[game_piece] + '_' + LOCATION_STAT_MAPPING[location]];
+
+				return acc;
+			}, {
+				pickup_hatch_ground: 0,
+				pickup_hatch_loading: 0,
+				pickup_cargo_ground: 0,
+				pickup_cargo_loading: 0,
+				drop_hatch_ship: 0,
+				drop_hatch_r1: 0,
+				drop_hatch_r2: 0,
+				drop_hatch_r3: 0,
+				drop_cargo_ship: 0,
+				drop_cargo_r1: 0,
+				drop_cargo_r2: 0,
+				drop_cargo_r3: 0
+			});
+
+			console.log('compiled results', action_results);
+
+			let hatch_total = action_results.pickup_hatch_ground + action_results.pickup_hatch_loading;
+			let cargo_total = action_results.pickup_cargo_ground + action_results.pickup_cargo_loading;
+
+			acc.pickup_hatch_total += hatch_total;
+			acc.pickup_cargo_total += cargo_total;
+
+			if (hatch_total > 0) {
+				++acc.pickup_hatch_count;
+				acc.pickup_hatch_ground += action_results.pickup_hatch_ground / hatch_total;
+				acc.pickup_hatch_loading += action_results.pickup_hatch_loading / hatch_total;
+			}
+
+			if (cargo_total > 0) {
+				++acc.pickup_cargo_count;
+				acc.pickup_cargo_ground += action_results.pickup_cargo_ground / cargo_total;
+				acc.pickup_cargo_loading += action_results.pickup_cargo_loading / cargo_total;
+			}
+
+			acc.drop_hatch_ship += action_results.drop_hatch_ship;
+			acc.drop_hatch_r1 += action_results.drop_hatch_r1;
+			acc.drop_hatch_r2 += action_results.drop_hatch_r2;
+			acc.drop_hatch_r3 += action_results.drop_hatch_r3;
+			acc.drop_cargo_ship += action_results.drop_cargo_ship;
+			acc.drop_cargo_r1 += action_results.drop_cargo_r1;
+			acc.drop_cargo_r2 += action_results.drop_cargo_r2;
+			acc.drop_cargo_r3 += action_results.drop_cargo_r3;
+
 			return acc;
 		}, {
 			starts_hatch: 0,
@@ -176,7 +245,23 @@ class Scout {
 			climb_count: 0,
 			carry_score: 0,
 			robot_speed_score: 0,
-			robot_speed_count: 0
+			robot_speed_count: 0,
+			pickup_hatch_total: 0,
+			pickup_hatch_count: 0,
+			pickup_hatch_ground: 0,
+			pickup_hatch_loading: 0,
+			pickup_cargo_total: 0,
+			pickup_cargo_count: 0,
+			pickup_cargo_ground: 0,
+			pickup_cargo_loading: 0,
+			drop_hatch_ship: 0,
+			drop_hatch_r1: 0,
+			drop_hatch_r2: 0,
+			drop_hatch_r3: 0,
+			drop_cargo_ship: 0,
+			drop_cargo_r1: 0,
+			drop_cargo_r2: 0,
+			drop_cargo_r3: 0
 		});
 
 		return new TeamStatistics({
@@ -192,9 +277,23 @@ class Scout {
 			end_lvl1: team_results.end_count ? team_results.end_lvl1 / team_results.end_count : '',
 			end_lvl2: team_results.end_count ? team_results.end_lvl2 / team_results.end_count : '',
 			end_lvl3: team_results.end_count ? team_results.end_lvl3 / team_results.end_count : '',
-			climb_speed_score: team_results.climb_count ? team_results.climb_speed_score /  team_results.climb_count : '',
+			climb_speed_score: team_results.climb_count ? team_results.climb_speed_score / team_results.climb_count : '',
 			carry_score: team_results.carry_score / sheets.length,
-			robot_speed_score: team_results.robot_speed_count ? team_results.robot_speed_score / team_results.robot_speed_count : ''
+			robot_speed_score: team_results.robot_speed_count ? team_results.robot_speed_score / team_results.robot_speed_count : '',
+			pickup_hatch_total: team_results.pickup_hatch_total / sheets.length,
+			pickup_hatch_ground: team_results.pickup_hatch_count ? team_results.pickup_hatch_ground / team_results.pickup_hatch_count : '',
+			pickup_hatch_loading: team_results.pickup_hatch_count ? team_results.pickup_hatch_loading / team_results.pickup_hatch_count : '',
+			pickup_cargo_total: team_results.pickup_cargo_total / sheets.length,
+			pickup_cargo_ground: team_results.pickup_cargo_count ? team_results.pickup_cargo_ground / team_results.pickup_cargo_count : '',
+			pickup_cargo_loading: team_results.pickup_cargo_count ? team_results.pickup_cargo_loading / team_results.pickup_cargo_count : '',
+			drop_hatch_ship: team_results.drop_hatch_ship / sheets.length,
+			drop_hatch_r1: team_results.drop_hatch_r1 / sheets.length,
+			drop_hatch_r2: team_results.drop_hatch_r2 / sheets.length,
+			drop_hatch_r3: team_results.drop_hatch_r3 / sheets.length,
+			drop_cargo_ship: team_results.drop_cargo_ship / sheets.length,
+			drop_cargo_r1: team_results.drop_cargo_r1 / sheets.length,
+			drop_cargo_r2: team_results.drop_cargo_r2 / sheets.length,
+			drop_cargo_r3: team_results.drop_cargo_r3 / sheets.length
 		});
 	}
 }

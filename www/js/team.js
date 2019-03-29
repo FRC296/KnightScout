@@ -35,22 +35,36 @@ class TeamStatistics {
 		this.robot_speed_score = ko.observable(team_statistics.robot_speed_score);
 		this.robot_speed_score.formatted = ko.computed(() => this.formatStat(this.robot_speed_score()), this);
 
-		this.pickup_hatch_count; // Average # of hatches picked up per match
-		this.pickup_hatch_ground; // % of picked up hatches from the ground
-		this.pickup_hatch_loading; // % of picked up hatches from the loading
-		this.pickup_cargo_count; // Average # of cargo picked up per match
-		this.pickup_cargo_ground; // % of picked up cargo from the ground
-		this.pickup_cargo_loading; // % of picked up cargo from the loading
+		this.pickup_hatch_total = ko.observable(team_statistics.pickup_hatch_total); // Average # of hatches picked up per match
+		this.pickup_hatch_total.formatted = ko.computed(() => this.formatStat(this.pickup_hatch_total()), this);
+		this.pickup_hatch_ground = ko.observable(team_statistics.pickup_hatch_ground); // % of picked up hatches from the ground
+		this.pickup_hatch_ground.formatted = ko.computed(() => this.formatStat(this.pickup_hatch_ground(), true), this);
+		this.pickup_hatch_loading = ko.observable(team_statistics.pickup_hatch_loading); // % of picked up hatches from the loading
+		this.pickup_hatch_loading.formatted = ko.computed(() => this.formatStat(this.pickup_hatch_loading(), true), this);
+		this.pickup_cargo_total = ko.observable(team_statistics.pickup_cargo_total); // Average # of cargo picked up per match
+		this.pickup_cargo_total.formatted = ko.computed(() => this.formatStat(this.pickup_cargo_total()), this);
+		this.pickup_cargo_ground = ko.observable(team_statistics.pickup_cargo_ground); // % of picked up cargo from the ground
+		this.pickup_cargo_ground.formatted = ko.computed(() => this.formatStat(this.pickup_cargo_ground(), true), this);
+		this.pickup_cargo_loading = ko.observable(team_statistics.pickup_cargo_loading); // % of picked up cargo from the loading
+		this.pickup_cargo_loading.formatted = ko.computed(() => this.formatStat(this.pickup_cargo_loading(), true), this);
 
-		this.drop_hatch_ship; // Average # of hatches scored at ship per match
-		this.drop_hatch_r1; // Average # of hatches scored at r1 per match
-		this.drop_hatch_r2; // Average # of hatches scored at r2 per match
-		this.drop_hatch_r3; // Average # of hatches scored at r3 per match
+		this.drop_hatch_ship = ko.observable(team_statistics.drop_hatch_ship); // Average # of hatches scored at ship per match
+		this.drop_hatch_ship.formatted = ko.computed(() => this.formatStat(this.drop_hatch_ship()), this);
+		this.drop_hatch_r1 = ko.observable(team_statistics.drop_hatch_r1); // Average # of hatches scored at r1 per match
+		this.drop_hatch_r1.formatted = ko.computed(() => this.formatStat(this.drop_hatch_r1()), this);
+		this.drop_hatch_r2 = ko.observable(team_statistics.drop_hatch_r2); // Average # of hatches scored at r2 per match
+		this.drop_hatch_r2.formatted = ko.computed(() => this.formatStat(this.drop_hatch_r2()), this);
+		this.drop_hatch_r3 = ko.observable(team_statistics.drop_hatch_r3); // Average # of hatches scored at r3 per match
+		this.drop_hatch_r3.formatted = ko.computed(() => this.formatStat(this.drop_hatch_r3()), this);
 
-		this.drop_cargo_ship; // Average # of cargo scored at ship per match
-		this.drop_cargo_r1; // Average # of cargo scored at r1 per match
-		this.drop_cargo_r2; // Average # of cargo scored at r2 per match
-		this.drop_cargo_r3; // Average # of cargo scored at r3 per match
+		this.drop_cargo_ship = ko.observable(team_statistics.drop_cargo_ship); // Average # of cargo scored at ship per match
+		this.drop_cargo_ship.formatted = ko.computed(() => this.formatStat(this.drop_cargo_ship()), this);
+		this.drop_cargo_r1 = ko.observable(team_statistics.drop_cargo_r1); // Average # of cargo scored at r1 per match
+		this.drop_cargo_r1.formatted = ko.computed(() => this.formatStat(this.drop_cargo_r1()), this);
+		this.drop_cargo_r2 = ko.observable(team_statistics.drop_cargo_r2); // Average # of cargo scored at r2 per match
+		this.drop_cargo_r2.formatted = ko.computed(() => this.formatStat(this.drop_cargo_r2()), this);
+		this.drop_cargo_r3 = ko.observable(team_statistics.drop_cargo_r3); // Average # of cargo scored at r3 per match
+		this.drop_cargo_r3.formatted = ko.computed(() => this.formatStat(this.drop_cargo_r3()), this);
 	}
 
 	formatStat(stat, percentage) {

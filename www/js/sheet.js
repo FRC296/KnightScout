@@ -3,7 +3,7 @@ const TOURNAMENT_LEVELS = [
 	'Playoff',
 	'Practice',
 	'Other'
-]
+];
 
 
 const ACTION_MAPPING = [
@@ -11,11 +11,21 @@ const ACTION_MAPPING = [
 	'Dropoff'
 ];
 
+const ACTION_STAT_MAPPING = [
+	'pickup',
+	'drop'
+]
+
 const GAME_PIECE_MAPPING = [
 	'Cargo',
 	'Hatch',
 	'None'
-]
+];
+
+const GAME_PIECE_STAT_MAPPING = [
+	'cargo',
+	'hatch'
+];
 
 const LOCATION_MAPPING = [
 	'Ground',
@@ -24,6 +34,15 @@ const LOCATION_MAPPING = [
 	'Rocket Level 1',
 	'Rocket Level 2',
 	'Rocket Level 3'
+];
+
+const LOCATION_STAT_MAPPING = [
+	'ground',
+	'loading',
+	'ship',
+	'r1',
+	'r2',
+	'r3'
 ];
 
 const SERIALIZATION_DELIMITER = '*';

@@ -430,13 +430,50 @@
 									<tr>
 										<th scope="col">Team</th>
 										<th scope="col">#</th>
+										<th scope="col" colspan="3">Pick H</th>
+										<th scope="col" colspan="3">Pick C</th>
+										<th scope="col" colspan="4">Drop H</th>
+										<th scope="col" colspan="4">Drop C</th>
 										<th scope="col">Def</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th></th>
+										<th>T</th>
+										<th>G%</th>
+										<th>L%</th>
+										<th>T</th>
+										<th>G%</th>
+										<th>L%</th>
+										<th>S</th>
+										<th>R1</th>
+										<th>R2</th>
+										<th>R3</th>
+										<th>S</th>
+										<th>R1</th>
+										<th>R2</th>
+										<th>R3</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody data-bind="foreach: scout.team_stats()">
 									<tr>
 										<td data-bind="text: team_number"></td>
 										<td data-bind="text: matches_scouted"></td>
+										<td data-bind="text: pickup_hatch_total.formatted()"></td>
+										<td data-bind="text: pickup_hatch_ground.formatted()"></td>
+										<td data-bind="text: pickup_hatch_loading.formatted()"></td>
+										<td data-bind="text: pickup_cargo_total.formatted()"></td>
+										<td data-bind="text: pickup_cargo_ground.formatted()"></td>
+										<td data-bind="text: pickup_cargo_loading.formatted()"></td>
+										<td data-bind="text: drop_hatch_ship.formatted()"></td>
+										<td data-bind="text: drop_hatch_r1.formatted()"></td>
+										<td data-bind="text: drop_hatch_r2.formatted()"></td>
+										<td data-bind="text: drop_hatch_r3.formatted()"></td>
+										<td data-bind="text: drop_cargo_ship.formatted()"></td>
+										<td data-bind="text: drop_cargo_r1.formatted()"></td>
+										<td data-bind="text: drop_cargo_r2.formatted()"></td>
+										<td data-bind="text: drop_cargo_r3.formatted()"></td>
 										<td data-bind="text: avg_defense_counts.formatted()"></td>
 									</tr>
 								</tbody>
