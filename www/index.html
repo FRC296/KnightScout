@@ -374,10 +374,301 @@
 					<h1>Welcome Collector!</h1>
 					<br>
 					<button class="btn btn-success btn-lg" data-bind="click: scanSheet">Scan Report</button>
+					<button class="btn btn-primary btn-lg" data-bind="click: scout.calculateAllTeamStatistics.bind(scout)">Calculate Stats</button>
 				</div>
-				<h2>Latest Results</h2>
+				<h2>Team Statistics</h2>
 				<div>
-					<table class="js-results-table"></table>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="start-tab" data-toggle="tab" href="#start" role="tab" aria-controls="start" aria-selected="true">Start</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="teleop-tab" data-toggle="tab" href="#teleop" role="tab" aria-controls="teleop" aria-selected="false">Teleop</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="end-game-tab" data-toggle="tab" href="#end-game" role="tab" aria-controls="end-game" aria-selected="false">End Game</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="start" role="tabpanel" aria-labelledby="start-tab">
+							<br/>
+							<table class="table table-sm table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Team</th>
+										<th scope="col">#</th>
+										<th scope="col" colspan="3">Starts</th>
+										<th scope="col" colspan="2">Auton</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th></th>
+										<th>H</th>
+										<th>C</th>
+										<th>N</th>
+										<th>B</th>
+										<th>S</th>
+									</tr>
+								</thead>
+								<tbody data-bind="foreach: scout.team_stats()">
+									<tr>
+										<td><a href="#" data-bind="text: team_number, click: view.bind($data)"></a></td>
+										<td data-bind="text: matches_scouted"></td>
+										<td data-bind="text: starts_hatch.formatted()"></td>
+										<td data-bind="text: starts_cargo.formatted()"></td>
+										<td data-bind="text: starts_nothing.formatted()"></td>
+										<td data-bind="text: auton_bonus_score.formatted()"></td>
+										<td data-bind="text: auton_mobility_score.formatted()"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane fade" id="teleop" role="tabpanel" aria-labelledby="teleop-tab">
+							<br/>
+							<table class="table table-sm table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Team</th>
+										<th scope="col">#</th>
+										<th scope="col" colspan="3">Pick H</th>
+										<th scope="col" colspan="3">Pick C</th>
+										<th scope="col" colspan="4">Drop H</th>
+										<th scope="col" colspan="4">Drop C</th>
+										<th scope="col">Def</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th></th>
+										<th>T</th>
+										<th>G%</th>
+										<th>L%</th>
+										<th>T</th>
+										<th>G%</th>
+										<th>L%</th>
+										<th>S</th>
+										<th>R1</th>
+										<th>R2</th>
+										<th>R3</th>
+										<th>S</th>
+										<th>R1</th>
+										<th>R2</th>
+										<th>R3</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody data-bind="foreach: scout.team_stats()">
+									<tr>
+										<td><a href="#" data-bind="text: team_number, click: view.bind($data)"></a></td>
+										<td data-bind="text: matches_scouted"></td>
+										<td data-bind="text: pickup_hatch_total.formatted()"></td>
+										<td data-bind="text: pickup_hatch_ground.formatted()"></td>
+										<td data-bind="text: pickup_hatch_loading.formatted()"></td>
+										<td data-bind="text: pickup_cargo_total.formatted()"></td>
+										<td data-bind="text: pickup_cargo_ground.formatted()"></td>
+										<td data-bind="text: pickup_cargo_loading.formatted()"></td>
+										<td data-bind="text: drop_hatch_ship.formatted()"></td>
+										<td data-bind="text: drop_hatch_r1.formatted()"></td>
+										<td data-bind="text: drop_hatch_r2.formatted()"></td>
+										<td data-bind="text: drop_hatch_r3.formatted()"></td>
+										<td data-bind="text: drop_cargo_ship.formatted()"></td>
+										<td data-bind="text: drop_cargo_r1.formatted()"></td>
+										<td data-bind="text: drop_cargo_r2.formatted()"></td>
+										<td data-bind="text: drop_cargo_r3.formatted()"></td>
+										<td data-bind="text: avg_defense_counts.formatted()"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane fade" id="end-game" role="tabpanel" aria-labelledby="end-game-tab">
+							<br/>
+							<table class="table table-sm table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Team</th>
+										<th scope="col">#</th>
+										<th scope="col" colspan="4">End</th>
+										<th scope="col" colspan="2">Climb</th>
+										<th scope="col">RS</th>
+									</tr>
+									<tr>
+										<th></th>
+										<th></th>
+										<th>F</th>
+										<th>1</th>
+										<th>2</th>
+										<th>3</th>
+										<th>S</th>
+										<th>C</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody data-bind="foreach: scout.team_stats()">
+									<tr>
+										<td><a href="#" data-bind="text: team_number, click: view.bind($data)"></a></td>
+										<td data-bind="text: matches_scouted"></td>
+										<td data-bind="text: end_fail.formatted()"></td>
+										<td data-bind="text: end_lvl1.formatted()"></td>
+										<td data-bind="text: end_lvl2.formatted()"></td>
+										<td data-bind="text: end_lvl3.formatted()"></td>
+										<td data-bind="text: climb_speed_score.formatted()"></td>
+										<td data-bind="text: carry_score.formatted()"></td>
+										<td data-bind="text: robot_speed_score.formatted()"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="o-page js-bind-app-state" data-role="page" id="team-profile-page">
+			<div class="container" data-bind="with: scout.current_stat">
+				<div class="jumbotron">
+					<h1>Profile - Team <span class="badge badge-primary" data-bind="text: team_number"></span></h1>
+					<p class="lead">
+						Matches scouted: <span class="badge badge-primary" data-bind="text: matches_scouted"></span><br />
+						Overall robot speed: <span class="badge badge-primary"><span data-bind="text: robot_speed_score.formatted()"></span> / 5</span>
+					</p>
+				</div>
+				<br />
+				<div class="card">
+					<div class="card-header">
+						Starting game piece
+					</div>
+					<div class="card-body">
+						<p class="card-text">The percentage of matches that a team started with a particular game piece</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Hatch: <span class="badge badge-primary" data-bind="text: starts_hatch.formatted()"></span></li>
+						<li class="list-group-item">Cargo: <span class="badge badge-primary" data-bind="text: starts_cargo.formatted()"></span></li>
+						<li class="list-group-item">Nothing: <span class="badge badge-primary" data-bind="text: starts_nothing.formatted()"></span></li>
+					</ul>
+				</div>
+				<br />
+				<div class="card">
+					<div class="card-header">
+						Autonomous
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Average autonomous scores</h5>
+						<p class="card-text">
+							Bonus:
+							<ol start="0">
+								<li>Didn't pass HAB line</li>
+								<li>Launched from level 1</li>
+								<li>Launched from level 2</li>
+							</ol>
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Autonomous Bonus: <span class="badge badge-primary"><span data-bind="text: auton_bonus_score.formatted()"></span> / 2</span></li>
+					</ul>
+					<div class="card-body">
+						<p class="card-text">
+							Mobility:
+							<ol start="0">
+								<li>Didn't move</li>
+								<li>Derpy movement</li>
+								<li>Moves but doesn't do anything</li>
+								<li>Places 1 piece</li>
+								<li>Places more than 1 piece</li>
+							</ol>
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Autonomous Mobility: <span class="badge badge-primary"><span data-bind="text: auton_mobility_score.formatted()"></span> / 4</span></li>
+					</ul>
+				</div>
+				<br />
+				<div class="card">
+					<div class="card-header">
+						Teleop - Offensive
+					</div>
+					<div class="card-body">
+						<p class="card-text">
+							Hatch Pickup Performance
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Average per match: <span class="badge badge-primary" data-bind="text: pickup_hatch_total.formatted()"></span></li>
+						<li class="list-group-item">% from ground: <span class="badge badge-primary" data-bind="text: pickup_hatch_ground.formatted()"></span></li>
+						<li class="list-group-item">% from station: <span class="badge badge-primary" data-bind="text: pickup_hatch_loading.formatted()"></span></li>
+					</ul>
+					<div class="card-body">
+						<p class="card-text">
+							Cargo Pickup Performance
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Average per match: <span class="badge badge-primary" data-bind="text: pickup_cargo_total.formatted()"></span></li>
+						<li class="list-group-item">% from ground: <span class="badge badge-primary" data-bind="text: pickup_cargo_ground.formatted()"></span></li>
+						<li class="list-group-item">% from station: <span class="badge badge-primary" data-bind="text: pickup_cargo_loading.formatted()"></span></li>
+					</ul>
+					<div class="card-body">
+						<p class="card-text">
+							Hatch Scoring Performance. Average number of dropoffs per match at the following locations:
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Ship: <span class="badge badge-primary" data-bind="text: drop_hatch_ship.formatted()"></span></li>
+						<li class="list-group-item">Rocket 1: <span class="badge badge-primary" data-bind="text: drop_hatch_r1.formatted()"></span></li>
+						<li class="list-group-item">Rocket 2: <span class="badge badge-primary" data-bind="text: drop_hatch_r2.formatted()"></span></li>
+						<li class="list-group-item">Rocket 3: <span class="badge badge-primary" data-bind="text: drop_hatch_r3.formatted()"></span></li>
+					</ul>
+					<div class="card-body">
+						<p class="card-text">
+							Cargo Scoring Performance. Average number of dropoffs per match at the following locations:
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Ship: <span class="badge badge-primary" data-bind="text: drop_cargo_ship.formatted()"></span></li>
+						<li class="list-group-item">Rocket 1: <span class="badge badge-primary" data-bind="text: drop_cargo_r1.formatted()"></span></li>
+						<li class="list-group-item">Rocket 2: <span class="badge badge-primary" data-bind="text: drop_cargo_r2.formatted()"></span></li>
+						<li class="list-group-item">Rocket 3: <span class="badge badge-primary" data-bind="text: drop_cargo_r3.formatted()"></span></li>
+					</ul>
+				</div>
+				<br />
+				<div class="card">
+					<div class="card-header">
+						Teleop - Defensive
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Average Defensive Interactions: <span class="badge badge-primary" data-bind="text: avg_defense_counts.formatted()"></span></li>
+					</ul>
+				</div>
+				<br />
+				<div class="card">
+					<div class="card-header">
+						End Game
+					</div>
+					<div class="card-body">
+						<p class="card-text">
+							Final platform location
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Failed: <span class="badge badge-primary" data-bind="text: end_fail.formatted()"></span></li>
+						<li class="list-group-item">Level 1: <span class="badge badge-primary" data-bind="text: end_lvl1.formatted()"></span></li>
+						<li class="list-group-item">Level 2: <span class="badge badge-primary" data-bind="text: end_lvl2.formatted()"></span></li>
+						<li class="list-group-item">Level 3: <span class="badge badge-primary" data-bind="text: end_lvl3.formatted()"></span></li>
+						<li class="list-group-item">Climbed on other robot: <span class="badge badge-primary" data-bind="text: end_climb.formatted()"></span></li>
+					</ul>
+					<div class="card-body">
+						<p class="card-text">
+							<h5 class="card-title">Climbing stats</h5>
+							Climb speed:
+							<ol start="0">
+								<li>Didn't climb</li>
+								<li>1-3 seconds</li>
+								<li>3-10 seconds</li>
+								<li>&gt; 10 seconds</li>
+							</ol>
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Climb speed: <span class="badge badge-primary" data-bind="text: climb_speed_score.formatted()"></span></li>
+						<li class="list-group-item">% of matches with robot carried: <span class="badge badge-primary" data-bind="text: carry_score.formatted()"></span></li>
+					</ul>
 				</div>
 			</div>
 		</section>
@@ -536,6 +827,7 @@
 		<script type="text/javascript" src="js/sheet.js"></script>
 		<script type="text/javascript" src="js/scout.js"></script>
 		<script type="text/javascript" src="js/utility.js"></script>
+		<script type="text/javascript" src="js/team.js"></script>
 
 		<script>
 			window.app_state = new AppState();
@@ -546,3 +838,4 @@
 		</script>
 	</body>
 </html>
+
