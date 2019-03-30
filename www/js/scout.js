@@ -6,6 +6,7 @@ class Scout {
 		this.current_sheet = ko.observable(new Sheet(ko.toJS(app_state.current_event)));
 		this.sheets = ko.observableArray(((stored_scout && stored_scout.sheets) || []).map(sheet => new Sheet(sheet)));
 		this.team_stats = ko.observableArray();
+		this.current_stat = ko.observable(new TeamStatistics());
 
 		let self = this;
 		this.editSheet = function() {
@@ -137,6 +138,9 @@ class Scout {
 				case 3:
 					++acc['end_lvl' + end_score];
 					break;
+				case 4:
+					++acc.end_climb;
+					break;
 			}
 			if (!isNaN(end_score)) {
 				++acc.end_count;
@@ -157,21 +161,6 @@ class Scout {
 			}
 
 			let actions = sheet.action_menu.actions();
-
-			/*for (let action in actions) {
-				let action_name = action.action_name();
-				let game_piece = action.game_piece();
-				let location = action.location();
-
-				// Pickup
-				if (action_name === 0) {
-					let pickup_stat_prefix = 'pickup_' + GAME_PIECE_STAT_MAPPING[game_piece];
-					++acc[pickup_stat_prefix + '_count'];
-				// Dropoff
-				} else if (action_name === 1){
-
-				}
-			}*/
 
 			let action_results = actions.reduce((acc, action) => {
 				let action_name = action.action_name();
@@ -195,8 +184,6 @@ class Scout {
 				drop_cargo_r2: 0,
 				drop_cargo_r3: 0
 			});
-
-			console.log('compiled results', action_results);
 
 			let hatch_total = action_results.pickup_hatch_ground + action_results.pickup_hatch_loading;
 			let cargo_total = action_results.pickup_cargo_ground + action_results.pickup_cargo_loading;
@@ -240,6 +227,7 @@ class Scout {
 			end_lvl1: 0,
 			end_lvl2: 0,
 			end_lvl3: 0,
+			end_climb: 0,
 			end_count: 0,
 			climb_speed_score: 0,
 			climb_count: 0,
@@ -277,6 +265,7 @@ class Scout {
 			end_lvl1: team_results.end_count ? team_results.end_lvl1 / team_results.end_count : '',
 			end_lvl2: team_results.end_count ? team_results.end_lvl2 / team_results.end_count : '',
 			end_lvl3: team_results.end_count ? team_results.end_lvl3 / team_results.end_count : '',
+			end_climb: team_results.end_count ? team_results.end_climb / team_results.end_count : '',
 			climb_speed_score: team_results.climb_count ? team_results.climb_speed_score / team_results.climb_count : '',
 			carry_score: team_results.carry_score / sheets.length,
 			robot_speed_score: team_results.robot_speed_count ? team_results.robot_speed_score / team_results.robot_speed_count : '',

@@ -1,5 +1,5 @@
 class TeamStatistics {
-	constructor(team_statistics) {
+	constructor(team_statistics = {}) {
 		this.team_number = ko.observable(team_statistics.team_number);
 		this.matches_scouted = ko.observable(team_statistics.matches_scouted);
 
@@ -26,6 +26,8 @@ class TeamStatistics {
 		this.end_lvl2.formatted = ko.computed(() => this.formatStat(this.end_lvl2(), true), this);
 		this.end_lvl3 = ko.observable(team_statistics.end_lvl3);
 		this.end_lvl3.formatted = ko.computed(() => this.formatStat(this.end_lvl3(), true), this);
+		this.end_climb = ko.observable(team_statistics.end_climb);
+		this.end_climb.formatted = ko.computed(() => this.formatStat(this.end_climb(), true), this);
 
 		this.climb_speed_score = ko.observable(team_statistics.climb_speed_score);
 		this.climb_speed_score.formatted = ko.computed(() => this.formatStat(this.climb_speed_score()), this);
@@ -79,5 +81,10 @@ class TeamStatistics {
 		}
 	
 		return parsed_stat.toFixed(1);
+	}
+
+	view() {
+		app_state.scout.current_stat(this);
+		window.goToPage('team-profile-page');
 	}
 }
