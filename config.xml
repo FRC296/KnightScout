@@ -11,11 +11,11 @@
     <access origin="*" />
 
     <platform name="ios">
-        <icon height="1024" platform="ios" src="www/res/icon/rad_icon.png" width="1024" />
-        <icon height="76" platform="ios" src="www/res/icon/rad_icon_76.png" width="76" />
-        <icon height="120" platform="ios" src="www/res/icon/rad_icon_120.png" width="120" />
-        <icon height="152" platform="ios" src="www/res/icon/rad_icon_152.png" width="152" />
-        <icon height="40" platform="ios" src="www/res/icon/rad_icon_40.png" width="40" />
+        <icon height="1024" platform="ios" src="www/res/icon/knight_scout3_1024.png" width="1024" />
+        <icon height="76" platform="ios" src="www/res/icon/knight_scout3_76.png" width="76" />
+        <icon height="120" platform="ios" src="www/res/icon/knight_scout3_120.png" width="120" />
+        <icon height="152" platform="ios" src="www/res/icon/knight_scout3_152.png" width="152" />
+        <icon height="40" platform="ios" src="www/res/icon/knight_scout3_40.png" width="40" />
 
         <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="overwrite">
             <string>Camera access is used to scan QR codes containing scouting information</string>
@@ -23,7 +23,7 @@
     </platform>
 
     <platform name="android">
-        <icon density="xxxhdpi" src="www/res/icon/rad_icon_192.png" />
+        <icon density="xxxhdpi" src="www/res/icon/knight_scout3_192.png" />
     </platform>
 
     <preference name="phonegap-version" value="cli-8.1.1" />
