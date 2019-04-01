@@ -31,7 +31,15 @@ class AppState {
 		//this.current_sheet = ko.observable(new Sheet($('.js-scout-sheet'), this.current_event()));
 		this.scout = new Scout(this);
 		this.sheet_maker = new SheetMaker();
-		this.strategy_sheets = new ko.observableArray();
+
+		let stored_strat_sheets = JSON.parse(localStorage.getItem('strategy_sheets') || null) || [];
+
+		this.strategy_sheets = new ko.observableArray(stored_strat_sheets.map(x => MakeStrategySheet(x)));
+
+		this.strategy_sheets.subscribe((sheets) => {
+			localStorage.setItem('strategy_sheets', ko.toJSON(sheets));
+		});
+
 		this.current_strategy = ko.observable(new StrategySheet());
 	}
 

@@ -29,6 +29,18 @@ class StrategySheet {
 	}
 }
 
+function MakeStrategySheet(js_sheet = {}) {
+	return new StrategySheet({
+		match_number: js_sheet.match_number,
+		red1: new TeamStatistics(js_sheet.red1),
+		red2: new TeamStatistics(js_sheet.red2),
+		red3: new TeamStatistics(js_sheet.red3),
+		blue1: new TeamStatistics(js_sheet.blue1),
+		blue2: new TeamStatistics(js_sheet.blue2),
+		blue3: new TeamStatistics(js_sheet.blue3),
+	});
+}
+
 class SheetMaker {
 	constructor(match = {}) {
 		this.match_number = ko.observable(match.match_number);
