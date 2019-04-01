@@ -710,7 +710,7 @@
 						<label for="make_sheet_blue3">Blue 3</label>
 						<input class="form-control" id="make_sheet_blue3" type="text" placeholder="Blue 3" data-bind="value: blue3">
 					</div>
-					<button class="btn btn-success" type="button" data-bind="click: buildSheet.bind($data)">Make Strategy Sheet</button>
+					<button class="btn btn-success" type="button" data-bind="click: makeSheet.bind($data)">Make Strategy Sheet</button>
 				</form>
 			</div>
 		</section>
@@ -731,6 +731,7 @@
 									<th scope="col">Blue 1</th>
 									<th scope="col">Blue 2</th>
 									<th scope="col">Blue 3</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody data-bind="foreach: strategy_sheets">
@@ -742,9 +743,112 @@
 									<td class="match-blue"><a href="#" data-bind="text: blue1().team_number, click: view.bind($data, $data.blue1)"></a></td>
 									<td class="match-blue"><a href="#" data-bind="text: blue2().team_number, click: view.bind($data, $data.blue2)"></a></td>
 									<td class="match-blue"><a href="#" data-bind="text: blue3().team_number, click: view.bind($data, $data.blue3)"></a></td>
+									<td><button class="btn btn-primary btn-sm" data-bind="click: see.bind($data)">View</button></td>
 								</tr>
 							</tbody>
 						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="o-page js-bind-app-state" data-role="page" id="current-strategy">
+			<div class="container" data-bind="with: current_strategy">
+				<div class="row">
+					<div class="col">
+						<h1>Match <span data-bind="text: match_number"></span></h1>
+					</div>
+				</div>
+				<div class="row strategy-cards" data-bind="foreach: match_number.teams()">
+					<div class="col-sm-4">
+						<div class="card" data-bind="with: team">
+							<div class="card-header">
+								<span data-bind="if: $parent.alliance == 'red'">
+									<span class="badge badge-danger" data-bind="text: team_number"></span> <span class="badge badge-danger" data-bind="text: matches_scouted"></span>
+								</span>
+								<span data-bind="if: $parent.alliance == 'blue'">
+									<span class="badge badge-primary" data-bind="text: team_number"></span> <span class="badge badge-primary" data-bind="text: matches_scouted"></span>
+								</span>
+							</div>
+							<div class="card-body">
+								<h6 class="card-title">Start</h6>
+								<p class="card-text">
+									<span class="badge badge-hatch" data-bind="text: starts_hatch.formatted()"></span>
+									<span class="badge badge-cargo" data-bind="text: starts_cargo.formatted()"></span>
+									<span class="badge badge-dark" data-bind="text: starts_nothing.formatted()"></span>
+								</p>
+								<h6 class="card-title">Auton</h6>
+								<p class="card-text">
+									Bonus: <span class="badge badge-primary"><span data-bind="text: auton_bonus_score.formatted()"></span> / 2</span>
+									<br />
+									Mobility: <span class="badge badge-success"><span data-bind="text: auton_mobility_score.formatted()"></span> / 4</span>
+								</p>
+								<h6 class="card-title">Pickup</h6>
+								<table class="table table-sm table-striped">
+									<thead>
+										<th>#</th>
+										<th>GND</th>
+										<th>STN</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td><span class="badge badge-hatch" data-bind="text: pickup_hatch_total.formatted()"></span></td>
+											<td><span class="badge badge-hatch" data-bind="text: pickup_hatch_ground.formatted()"></span></td>
+											<td><span class="badge badge-hatch" data-bind="text: pickup_hatch_loading.formatted()"></span></td>
+										</tr>
+										<tr>
+											<td><span class="badge badge-cargo" data-bind="text: pickup_cargo_total.formatted()"></span></td>
+											<td><span class="badge badge-cargo" data-bind="text: pickup_cargo_ground.formatted()"></span></td>
+											<td><span class="badge badge-cargo" data-bind="text: pickup_cargo_loading.formatted()"></span></td>
+										</tr>
+									</tbody>
+								</table>
+								<h6 class="card-title">Dropoff</h6>
+								<table class="table table-sm table-striped">
+									<thead>
+										<th>SHIP</th>
+										<th>R1</th>
+										<th>R2</th>
+										<th>R3</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_ship.formatted()"></span></td>
+											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_r1.formatted()"></span></td>
+											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_r2.formatted()"></span></td>
+											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_r3.formatted()"></span></td>
+										</tr>
+										<tr>
+											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_ship.formatted()"></span></td>
+											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_r1.formatted()"></span></td>
+											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_r2.formatted()"></span></td>
+											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_r3.formatted()"></span></td>
+										</tr>
+									</tbody>
+								</table>
+								<h6 class="card-title">Def: <span class="badge badge-primary" data-bind="text: avg_defense_counts.formatted()"></span></h6>
+								<h6 class="card-title">End</h6>
+								<table class="table table-sm table-striped">
+									<thead>
+										<th>F</th>
+										<th>L1</th>
+										<th>L2</th>
+										<th>L3</th>
+										<th>R</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td><span class="badge badge-danger" data-bind="text: end_fail.formatted()"></span></td>
+											<td><span class="badge badge-primary" data-bind="text: end_lvl1.formatted()"></span></td>
+											<td><span class="badge badge-primary" data-bind="text: end_lvl2.formatted()"></span></td>
+											<td><span class="badge badge-primary" data-bind="text: end_lvl3.formatted()"></span></td>
+											<td><span class="badge badge-success" data-bind="text: end_climb.formatted()"></span></td>
+										</tr>
+									</tbody>
+								</table>
+								<h6 class="card-title">Climb Speed: <span class="badge badge-primary"><span data-bind="text: climb_speed_score.formatted()"></span> / 3</span></h6>
+								<h6 class="card-title">Help Climb: <span class="badge badge-success" data-bind="text: carry_score.formatted()"></span></h6>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

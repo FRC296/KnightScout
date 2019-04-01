@@ -32,7 +32,7 @@ class AppState {
 		this.scout = new Scout(this);
 		this.sheet_maker = new SheetMaker();
 		this.strategy_sheets = new ko.observableArray();
-		this.current_strategy = new StrategySheet();
+		this.current_strategy = ko.observable(new StrategySheet());
 	}
 
 	setCurrentEvent(event) {

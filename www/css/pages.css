@@ -31,3 +31,23 @@
 #qr_code_display img {
 	margin: 0 auto;
 }
+
+.badge-cargo {
+	background-color: #f24701;
+	color: #ffffff;
+}
+
+.badge-hatch {
+	background-color: #edde36;
+	color: #000000;
+}
+
+@media (max-width: 768px) and (min-width: 576px) {
+	.strategy-cards .col-sm-4 {
+		padding: 0;
+	}
+}
+
+.strategy-cards .card {
+	margin-bottom: 10px;
+}

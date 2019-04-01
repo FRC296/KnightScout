@@ -25,7 +25,10 @@ class Match {
 
 	makeMatchStrategy() {
 		let strategyBuilder = new SheetMaker(this);
-		strategyBuilder.buildSheet();
+		let strategySheet = strategyBuilder.buildSheet();
+
+		app_state.current_strategy(strategySheet);
+		window.goToPage('current-strategy');
 	}
 }
 

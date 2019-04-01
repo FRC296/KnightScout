@@ -7,11 +7,25 @@ class StrategySheet {
 		this.blue1 = ko.observable(sheet.blue1 || new TeamStatistics());
 		this.blue2 = ko.observable(sheet.blue2 || new TeamStatistics());
 		this.blue3 = ko.observable(sheet.blue3 || new TeamStatistics());
+
+		this.match_number.teams = ko.computed(() => [
+			{alliance: 'red', team: this.red1},
+			{alliance: 'red', team: this.red2},
+			{alliance: 'red', team: this.red3},
+			{alliance: 'blue', team: this.blue1},
+			{alliance: 'blue', team: this.blue2},
+			{alliance: 'blue', team: this.blue3}
+		], this);
 	}
 
 	view(sheet) {
 		app_state.scout.current_stat(sheet());
 		window.goToPage('team-profile-page');
+	}
+
+	see() {
+		app_state.current_strategy(this);
+		window.goToPage('current-strategy');
 	}
 }
 
@@ -39,6 +53,12 @@ class SheetMaker {
 		});
 		app_state.strategy_sheets.push(sheet);
 		return sheet;
+	}
+
+	makeSheet() {
+		let sheet = this.buildSheet();
+		app_state.current_strategy(sheet);
+		window.goToPage('current-strategy');
 	}
 
 	findTeam(team_number) {
