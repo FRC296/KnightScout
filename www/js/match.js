@@ -22,6 +22,11 @@ class Match {
 		});
 		window.goToPage('scout-sheet');
 	}
+
+	makeMatchStrategy() {
+		let strategyBuilder = new SheetMaker(this);
+		strategyBuilder.buildSheet();
+	}
 }
 
 function BuildMatch(match_info) {

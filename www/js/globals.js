@@ -30,6 +30,9 @@ class AppState {
 
 		//this.current_sheet = ko.observable(new Sheet($('.js-scout-sheet'), this.current_event()));
 		this.scout = new Scout(this);
+		this.sheet_maker = new SheetMaker();
+		this.strategy_sheets = new ko.observableArray();
+		this.current_strategy = new StrategySheet();
 	}
 
 	setCurrentEvent(event) {
@@ -64,5 +67,9 @@ class AppState {
 				bootbox.alert("QR Code Scan Failed");
 			}
 		);
+	}
+
+	makeSheet() {
+		window.goToPage('make-strategy-sheet');
 	}
 }

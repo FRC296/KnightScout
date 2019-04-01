@@ -29,6 +29,9 @@
 					<li class="nav-item js-navbar-item" data-active-page="#collect-page">
 						<a class="nav-link" href="#collect-page" role="button">Collector</a>
 					</li>
+					<li class="nav-item js-navbar-item" data-active-page="#strategy-list">
+						<a class="nav-link" href="#strategy-list" role="button">Driver</a>
+					</li>
 					<li class="nav-item js-navbar-item" data-active-page="#event-page">
 						<a class="nav-link" href="#event-page" role="button">Event</a>
 					</li>
@@ -375,6 +378,7 @@
 					<br>
 					<button class="btn btn-success btn-lg" data-bind="click: scanSheet">Scan Report</button>
 					<button class="btn btn-primary btn-lg" data-bind="click: scout.calculateAllTeamStatistics.bind(scout)">Calculate Stats</button>
+					<button class="btn btn-warning btn-lg" data-bind="click: makeSheet">Make Strategy Sheet</button>
 				</div>
 				<h2>Team Statistics</h2>
 				<div>
@@ -672,6 +676,79 @@
 				</div>
 			</div>
 		</section>
+		<section class="o-page js-bind-app-state" data-role="page" id="make-strategy-sheet">
+			<div class="container" data-bind="with: sheet_maker">
+				<div class="jumbotron">
+					<h1>Make Strategy Sheet</h1>
+				</div>
+				<form>
+					<div class="form-group">
+						<label for="make_sheet_match_number">Match Number</label>
+						<input class="form-control" id="make_sheet_match_number" type="text" placeholder="Match Number" data-bind="value: match_number">
+					</div>
+					<div class="form-group">
+						<label for="make_sheet_red1">Red 1</label>
+						<input class="form-control" id="make_sheet_red1" type="text" placeholder="Red 1" data-bind="value: red1">
+					</div>
+					<div class="form-group">
+						<label for="make_sheet_red2">Red 2</label>
+						<input class="form-control" id="make_sheet_red2" type="text" placeholder="Red 2" data-bind="value: red2">
+					</div>
+					<div class="form-group">
+						<label for="make_sheet_red3">Red 3</label>
+						<input class="form-control" id="make_sheet_red3" type="text" placeholder="Red 3" data-bind="value: red3">
+					</div>
+					<div class="form-group">
+						<label for="make_sheet_blue1">Blue 1</label>
+						<input class="form-control" id="make_sheet_blue1" type="text" placeholder="Blue 1" data-bind="value: blue1">
+					</div>
+					<div class="form-group">
+						<label for="make_sheet_blue2">Blue 2</label>
+						<input class="form-control" id="make_sheet_blue2" type="text" placeholder="Blue 2" data-bind="value: blue2">
+					</div>
+					<div class="form-group">
+						<label for="make_sheet_blue3">Blue 3</label>
+						<input class="form-control" id="make_sheet_blue3" type="text" placeholder="Blue 3" data-bind="value: blue3">
+					</div>
+					<button class="btn btn-success" type="button" data-bind="click: buildSheet.bind($data)">Make Strategy Sheet</button>
+				</form>
+			</div>
+		</section>
+		<section class="o-page js-bind-app-state" data-role="page" id="strategy-list">
+			<div class="container">
+				<div class="jumbotron">
+					<h1>Strategy Sheets</h1>
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<table class="table table-sm">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Red 1</th>
+									<th scope="col">Red 2</th>
+									<th scope="col">Red 3</th>
+									<th scope="col">Blue 1</th>
+									<th scope="col">Blue 2</th>
+									<th scope="col">Blue 3</th>
+								</tr>
+							</thead>
+							<tbody data-bind="foreach: strategy_sheets">
+								<tr class="match">
+									<th scope="row" data-bind="text: match_number"></th>
+									<td class="match-red"><a href="#" data-bind="text: red1().team_number, click: view.bind($data, $data.red1)"></a></td>
+									<td class="match-red"><a href="#" data-bind="text: red2().team_number, click: view.bind($data, $data.red2)"></a></td>
+									<td class="match-red"><a href="#" data-bind="text: red3().team_number, click: view.bind($data, $data.red3)"></a></td>
+									<td class="match-blue"><a href="#" data-bind="text: blue1().team_number, click: view.bind($data, $data.blue1)"></a></td>
+									<td class="match-blue"><a href="#" data-bind="text: blue2().team_number, click: view.bind($data, $data.blue2)"></a></td>
+									<td class="match-blue"><a href="#" data-bind="text: blue3().team_number, click: view.bind($data, $data.blue3)"></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
 		<section class="o-page js-bind-app-state" data-role="page" id="event-page">
 			<div class="container" data-bind="with: current_event">
 				<div class="jumbotron">
@@ -697,6 +774,7 @@
 									<th scope="col">Blue 1</th>
 									<th scope="col">Blue 2</th>
 									<th scope="col">Blue 3</th>
+									<th scope="col">Strat</th>
 								</tr>
 							</thead>
 							<tbody data-bind="foreach: matches">
@@ -709,6 +787,7 @@
 									<td class="match-blue"><a href="#" data-bind="text: blue1, click: scoutMatch.bind($data, $data.blue1, '0')"></a></td>
 									<td class="match-blue"><a href="#" data-bind="text: blue2, click: scoutMatch.bind($data, $data.blue2, '0')"></a></td>
 									<td class="match-blue"><a href="#" data-bind="text: blue3, click: scoutMatch.bind($data, $data.blue3, '0')"></a></td>
+									<td><button class="btn btn-success btn-sm" data-bind="click: makeMatchStrategy.bind($data)">Make</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -828,6 +907,7 @@
 		<script type="text/javascript" src="js/scout.js"></script>
 		<script type="text/javascript" src="js/utility.js"></script>
 		<script type="text/javascript" src="js/team.js"></script>
+		<script type="text/javascript" src="js/strategy.js"></script>
 
 		<script>
 			window.app_state = new AppState();
