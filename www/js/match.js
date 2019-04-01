@@ -22,6 +22,14 @@ class Match {
 		});
 		window.goToPage('scout-sheet');
 	}
+
+	makeMatchStrategy() {
+		let strategyBuilder = new SheetMaker(this);
+		let strategySheet = strategyBuilder.buildSheet();
+
+		app_state.current_strategy(strategySheet);
+		window.goToPage('current-strategy');
+	}
 }
 
 function BuildMatch(match_info) {
