@@ -31,7 +31,15 @@ class AppState {
 		//this.current_sheet = ko.observable(new Sheet($('.js-scout-sheet'), this.current_event()));
 		this.scout = new Scout(this);
 		this.sheet_maker = new SheetMaker();
-		this.strategy_sheets = new ko.observableArray();
+
+		let stored_strat_sheets = JSON.parse(localStorage.getItem('strategy_sheets') || null) || [];
+
+		this.strategy_sheets = new ko.observableArray(stored_strat_sheets.map(x => MakeStrategySheet(x)));
+
+		this.strategy_sheets.subscribe((sheets) => {
+			localStorage.setItem('strategy_sheets', ko.toJSON(sheets));
+		});
+
 		this.current_strategy = ko.observable(new StrategySheet());
 	}
 
@@ -59,6 +67,10 @@ class AppState {
 	scanSheet() {
 		cordova.plugins.barcodeScanner.scan(
 			result => {
+				if (result.cancelled) {
+					return;
+				}
+
 				bootbox.alert("Receiving info: " + result.text, () => {
 					this.scout.sheets.push(Sheet.deserializeSheet(result.text));
 				});
@@ -68,6 +80,24 @@ class AppState {
 			}
 		);
 	}
+
+	scanStrategy() {
+		cordova.plugins.barcodeScanner.scan(
+			result => {
+				if (result.cancelled) {
+					return;
+				}
+
+				bootbox.alert("Receiving info: " + result.text, () => {
+					this.strategy_sheets.push(StrategySheet.deserializeSheet(result.text));
+				});
+			},
+			error => {
+				bootbox.alert("QR Code Scan Failed");
+			}
+		);
+	}
+
 
 	makeSheet() {
 		window.goToPage('make-strategy-sheet');
