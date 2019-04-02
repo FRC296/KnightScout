@@ -88,14 +88,6 @@ class TeamStatistics {
 		window.goToPage('team-profile-page');
 	}
 
-	padInt(int, size) {
-		if ($.isNumeric(int)) {
-			return parseInt(int).toString().padStart(size, '0');
-		}
-
-		return new Array(size + 1).join(' ');
-	}
-
 	padInt(num, size, decimals) {
 		if ($.isNumeric(num)) {
 			decimals = decimals || 0;
