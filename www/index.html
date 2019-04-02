@@ -718,6 +718,7 @@
 			<div class="container">
 				<div class="jumbotron">
 					<h1>Strategy Sheets</h1>
+					<button class="btn btn-success" data-bind="click: scanStrategy">Scan Strategy Sheet</button>
 				</div>
 				<div class="row">
 					<div class="col-sm">
@@ -732,6 +733,7 @@
 									<th scope="col">Blue 2</th>
 									<th scope="col">Blue 3</th>
 									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody data-bind="foreach: strategy_sheets">
@@ -744,6 +746,7 @@
 									<td class="match-blue"><a href="#" data-bind="text: blue2().team_number, click: view.bind($data, $data.blue2)"></a></td>
 									<td class="match-blue"><a href="#" data-bind="text: blue3().team_number, click: view.bind($data, $data.blue3)"></a></td>
 									<td><button class="btn btn-primary btn-sm" data-bind="click: see.bind($data)">View</button></td>
+									<td><button class="btn btn-success btn-sm" data-bind="click: createQRcode.bind($data)">QR Code</button></td>
 								</tr>
 							</tbody>
 						</table>

@@ -29,6 +29,8 @@ class EventSignup {
 	save() {
 		this.$signup_modal.modal('hide')
 		window.app_state.setCurrentEvent(this.event());
+		window.app_state.scout.current_sheet(new Sheet(ko.toJS(window.app_state.current_event)));
+
 		if (this._on_submit) {
 			this._on_submit();
 			this._on_submit = undefined;

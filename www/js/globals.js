@@ -67,6 +67,10 @@ class AppState {
 	scanSheet() {
 		cordova.plugins.barcodeScanner.scan(
 			result => {
+				if (result.cancelled) {
+					return;
+				}
+
 				bootbox.alert("Receiving info: " + result.text, () => {
 					this.scout.sheets.push(Sheet.deserializeSheet(result.text));
 				});
@@ -76,6 +80,24 @@ class AppState {
 			}
 		);
 	}
+
+	scanStrategy() {
+		cordova.plugins.barcodeScanner.scan(
+			result => {
+				if (result.cancelled) {
+					return;
+				}
+
+				bootbox.alert("Receiving info: " + result.text, () => {
+					this.strategy_sheets.push(StrategySheet.deserializeSheet(result.text));
+				});
+			},
+			error => {
+				bootbox.alert("QR Code Scan Failed");
+			}
+		);
+	}
+
 
 	makeSheet() {
 		window.goToPage('make-strategy-sheet');

@@ -27,6 +27,91 @@ class StrategySheet {
 		app_state.current_strategy(this);
 		window.goToPage('current-strategy');
 	}
+
+	testSerialization() {
+		console.log('red1', ko.toJS(this.blue2));
+		var red_stream = this.blue2().serializeStats();
+		console.log('red1 stream', red_stream);
+		var red_info = TeamStatistics.deserializeSheet(red_stream);
+		console.log('red1 info', red_info);
+	}
+
+	serializeStrategy() {
+		let data = [
+			this.match_number().toString().padStart(4, '0'),
+			this.red1().serializeStats(),
+			this.red2().serializeStats(),
+			this.red3().serializeStats(),
+			this.blue1().serializeStats(),
+			this.blue2().serializeStats(),
+			this.blue3().serializeStats()
+		];
+
+		return data.join('*');
+	}
+
+	static deserializeSheet(stream) {
+		let parts = stream.split('*');
+
+		return new StrategySheet({
+			match_number: parseInt(parts[0]),
+			red1: TeamStatistics.deserializeSheet(parts[1]),
+			red2: TeamStatistics.deserializeSheet(parts[2]),
+			red3: TeamStatistics.deserializeSheet(parts[3]),
+			blue1: TeamStatistics.deserializeSheet(parts[4]),
+			blue2: TeamStatistics.deserializeSheet(parts[5]),
+			blue3: TeamStatistics.deserializeSheet(parts[6])
+		});
+	}
+
+	createQRcode() {
+		console.log('Creating QR code');
+
+		let $qr_code = $('.js-qr-code');
+		let $modal = $('#qr_code_display');
+
+		console.log('Serialize Sheet!');
+
+		let data = {};
+
+		try {
+			data = this.serializeStrategy();
+		} catch(error) {
+			bootbox.alert('Serialization Failed. Error:' + JSON.stringify(error));
+			console.log('Serialization Failed', JSON.stringify(error));
+			return;
+		}
+
+		console.log('QR encoding:', data);
+		console.log('Length', data.length);
+
+		$qr_code.empty();
+
+		if (data.length > 1273) {
+			bootbox.alert('Strategy Sheet too big!');
+			return;
+		}
+
+		let modal_width = (parseInt($('.modal-lg', $modal).css('max-width').replace('px', '')) || 1140);
+		let best_height = Math.min(window.innerHeight * 0.8, window.innerWidth * 0.8, modal_width * 0.9);
+
+		try {
+			let qrcode = new QRCode($qr_code[0], {
+				text: data,
+				width: best_height,
+				height: best_height,
+				colorDark : "#000000",
+				colorLight : "#ffffff",
+				correctLevel : QRCode.CorrectLevel.H
+			});
+	
+			$modal.modal();
+		} catch (error) {
+			console.log('QR Code error', error);
+			bootbox.alert('Failed to generate QR code. Error: ' + JSON.stringify(error));
+		}
+
+	}
 }
 
 function MakeStrategySheet(js_sheet = {}) {
