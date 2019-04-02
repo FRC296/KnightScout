@@ -88,3 +88,26 @@ $('.js-delete-scout-info').on('click', () => {
 		}
 	});
 });
+
+$('.js-delete-strategy-info').on('click', () => {
+	bootbox.confirm({
+		message: "Are you sure you want to delete all strategy information?",
+		backdrop: true,
+		buttons: {
+			confirm: {
+				label: 'Yes',
+				className: 'btn-danger'
+			},
+			cancel: {
+				label: 'No',
+				className: 'btn-primary'
+			}
+		},
+		callback: function (result) {
+			if (result) {
+				localStorage.removeItem('strategy_sheets');
+				location.reload()
+			}
+		}
+	});
+});
