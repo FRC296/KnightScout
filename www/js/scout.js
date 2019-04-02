@@ -45,7 +45,11 @@ class Scout {
 		});
 
 		$(document).on('persist_scout', () => {
-			localStorage.setItem('scout', ko.toJSON(this));
+			try {
+				localStorage.setItem('scout', ko.toJSON(this));
+			} catch(e) {
+				bootbox.alert("Could not save scouting sheets. Try deleting old scouting sheets to make more room.");
+			}
 		});
 	}
 

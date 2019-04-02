@@ -734,6 +734,7 @@
 									<th scope="col">Blue 3</th>
 									<th></th>
 									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody data-bind="foreach: strategy_sheets">
@@ -747,6 +748,7 @@
 									<td class="match-blue"><a href="#" data-bind="text: blue3().team_number, click: view.bind($data, $data.blue3)"></a></td>
 									<td><button class="btn btn-primary btn-sm" data-bind="click: see.bind($data)">View</button></td>
 									<td><button class="btn btn-success btn-sm" data-bind="click: createQRcode.bind($data)">QR Code</button></td>
+									<td><button class="btn btn-danger btn-sm" data-bind="click: $parent.deleteStrategy.bind($parent, $data)">Delete</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -942,7 +944,8 @@
 							</div>
 							<div class="card-body">
 								<button class="btn btn-danger js-delete-event-info">Delete Event Information</button></br></br>
-								<button class="btn btn-danger js-delete-scout-info">Delete Scout Sheet Information</button>
+								<button class="btn btn-danger js-delete-scout-info">Delete Scout Sheet Information</button></br></br>
+								<button class="btn btn-danger js-delete-strategy-info">Delete Strategy Information</button>
 							</div>
 						</div>
 					</div>

@@ -37,7 +37,11 @@ class AppState {
 		this.strategy_sheets = new ko.observableArray(stored_strat_sheets.map(x => MakeStrategySheet(x)));
 
 		this.strategy_sheets.subscribe((sheets) => {
-			localStorage.setItem('strategy_sheets', ko.toJSON(sheets));
+			try {
+				localStorage.setItem('strategy_sheets', ko.toJSON(sheets));
+			} catch(e) {
+				bootbox.alert("Could not save strategy sheet. Try deleting old strategy sheets to make more room.");
+			}
 		});
 
 		this.current_strategy = ko.observable(new StrategySheet());
@@ -71,9 +75,7 @@ class AppState {
 					return;
 				}
 
-				bootbox.alert("Receiving info: " + result.text, () => {
-					this.scout.sheets.push(Sheet.deserializeSheet(result.text));
-				});
+				this.scout.sheets.push(Sheet.deserializeSheet(result.text));
 			},
 			error => {
 				bootbox.alert("QR Code Scan Failed");
@@ -101,5 +103,27 @@ class AppState {
 
 	makeSheet() {
 		window.goToPage('make-strategy-sheet');
+	}
+
+	deleteStrategy(sheet) {
+		bootbox.confirm({
+			message: "Are you sure you want to delete this strategy sheet?",
+			backdrop: true,
+			buttons: {
+				confirm: {
+					label: 'Yes',
+					className: 'btn-danger'
+				},
+				cancel: {
+					label: 'No',
+					className: 'btn-primary'
+				}
+			},
+			callback: (result) => {
+				if (result) {
+					this.strategy_sheets.remove(sheet);
+				}
+			}
+		});
 	}
 }
