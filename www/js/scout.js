@@ -173,6 +173,14 @@ class Scout {
 
 				++acc[ACTION_STAT_MAPPING[action_name] + '_' + GAME_PIECE_STAT_MAPPING[game_piece] + '_' + LOCATION_STAT_MAPPING[location]];
 
+				/*if (action_name === 'drop') {
+					if (game_piece == 'hatch') {
+						++acc['drop_hatch_total'];
+					} else if (game_piece == 'cargo') {
+						++acc['drop_cargo_total'];
+					}
+				}*/
+
 				return acc;
 			}, {
 				pickup_hatch_ground: 0,
@@ -186,7 +194,9 @@ class Scout {
 				drop_cargo_ship: 0,
 				drop_cargo_r1: 0,
 				drop_cargo_r2: 0,
-				drop_cargo_r3: 0
+				drop_cargo_r3: 0,
+				//drop_cargo_total: 0,
+				//drop_hatch_total: 0
 			});
 
 			let hatch_total = action_results.pickup_hatch_ground + action_results.pickup_hatch_loading;
@@ -194,6 +204,9 @@ class Scout {
 
 			acc.pickup_hatch_total += hatch_total;
 			acc.pickup_cargo_total += cargo_total;
+
+			acc.drop_hatch_total += action_results.drop_hatch_ship + action_results.drop_hatch_r1 + action_results.drop_hatch_r2 + action_results.drop_hatch_r3;
+			acc.drop_cargo_total += action_results.drop_cargo_ship + action_results.drop_cargo_r1 + action_results.drop_cargo_r2 + action_results.drop_cargo_r3;
 
 			if (hatch_total > 0) {
 				++acc.pickup_hatch_count;
@@ -253,7 +266,9 @@ class Scout {
 			drop_cargo_ship: 0,
 			drop_cargo_r1: 0,
 			drop_cargo_r2: 0,
-			drop_cargo_r3: 0
+			drop_cargo_r3: 0,
+			drop_hatch_total: 0,
+			drop_cargo_total: 0
 		});
 
 		return new TeamStatistics({
@@ -286,7 +301,11 @@ class Scout {
 			drop_cargo_ship: team_results.drop_cargo_ship / sheets.length,
 			drop_cargo_r1: team_results.drop_cargo_r1 / sheets.length,
 			drop_cargo_r2: team_results.drop_cargo_r2 / sheets.length,
-			drop_cargo_r3: team_results.drop_cargo_r3 / sheets.length
+			drop_cargo_r3: team_results.drop_cargo_r3 / sheets.length,
+			drop_cargo_total_avg: team_results.drop_cargo_total / sheets.length,
+			drop_hatch_total_avg: team_results.drop_hatch_total / sheets.length,
+			drop_cargo_total: team_results.drop_cargo_total,
+			drop_hatch_total: team_results.drop_hatch_total,
 		});
 	}
 }
