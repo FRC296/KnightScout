@@ -48,7 +48,7 @@
 			<div class="container">
 				</br>
 				<div class="jumbotron">
-					<h1 class="display-4">Welcome to the 296 Scouting Alpha!</h1>
+					<h1 class="display-4">Welcome to the 296 Scouting Alpha! BetaBots Edition!</h1>
 					<p class="lead">Please select your role:</p>
 					<br>
 					<a class="btn btn-success btn-lg" href="#scout-page" role="button">Scout</a>
@@ -152,42 +152,39 @@
 									<label for="scout_match_alliance">Alliance</label>
 									<select id="scout_match_alliance" class="custom-select" data-bind="value: alliance">
 										<option value="" selected disabled>Select Alliance</option>
-										<option value="0">Blue</option>
-										<option value="1">Red</option>
+										<option value="0">Green</option>
+										<option value="1">Yellow</option>
 									</select>
 								</div>
 							</div>
-							<h2>Sandstorm</h2>
+							<h2>Autonomous</h2>
 							<div class="form-group">
 								<label for="scout_match_start_piece">Starts with</label>
 								<select id="scout_match_start_piece" class="custom-select" data-bind="value: starts_with">
 									<option value="" selected disabled>Select Piece</option>
-									<option value="1">Hatch</option>
-									<option value="0">Cargo</option>
-									<option value="2">Nothing</option>
+									<option value="0">Particle</option>
+									<option value="1">Nothing</option>
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="scout_match_start_piece">Sandstorm Bonus</label>
+								<label for="scout_match_start_piece">Autonomous Bonus</label>
 								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_bonus">
 									<option value="" selected disabled>Select Bonus</option>
-									<option value="1">Launched from level 1</option>
-									<option value="2">Launched from level 2</option>
-									<option value="0">Didn't pass HAB line</option>
+									<option value="0">Didn't Move</option>
+									<option value="1">Didn't Score</option>
+									<option value="2">Scored in Cell 1</option>
+									<option value="3">Scored in Cell 2</option>
+									<option value="4">Scored in Cell 3</option>
 								</select>
-								<small class="form-text text-muted">
-									To score the sandstorm bonus, the robot must have started on a platform and drive pass the HAB line
-								</small>
 							</div>
 							<div class="form-group">
-								<label for="scout_match_start_piece">Sandstorm Mobility</label>
+								<label for="scout_match_start_piece">Autonomous Mobility</label>
 								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_mobility">
 									<option value="" selected disabled>Select Mobility</option>
 									<option value="0">Didn't move</option>
 									<option value="1">Derpy movement</option>
 									<option value="2">Moves but doesn't do anything</option>
 									<option value="3">Places 1 piece</option>
-									<option value="4">Places more than 1 piece</option>
 								</select>
 							</div>
 							<h2>Teleop</h2>
@@ -200,77 +197,27 @@
 										</ol>
 										<div class="form-row">
 											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="0" data-next="pickup_piece" data-bind="click: updateMenu" type="button">Pickup</button>
-											</div>
-											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="1" data-next="dropoff_piece" data-bind="click: updateMenu" type="button">Dropoff</button>
+												<button class="btn btn-primary btn-lg" data-key="action_name" data-value="0" data-next="score" data-bind="click: updateMenu" type="button">Score</button>
 											</div>
 										</div>
 									</div>
-									<div class="o-action-menu__menu" data-menu="pickup_piece" data-bind="if: current_menu() === 'pickup_piece'">
-										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
-											<li class="breadcrumb-item active">Game Piece</li>
-										</ol>
-										<div class="form-row">
-											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="pickup_location" data-bind="click: updateMenu" type="button">Cargo</button>
-											</div>
-											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="pickup_location" data-bind="click: updateMenu" type="button">Hatch</button>
-											</div>
-										</div>
-									</div>
-									<div class="o-action-menu__menu" data-menu="dropoff_piece" data-bind="if: current_menu() === 'dropoff_piece'">
-										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
-											<li class="breadcrumb-item active">Game Piece</li>
-										</ol>
-										<div class="form-row">
-											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="0" data-next="dropoff_location" data-bind="click: updateMenu" type="button">Cargo</button>
-											</div>
-											<div class="col">
-												<button class="btn btn-primary btn-lg" data-key="game_piece" data-value="1" data-next="dropoff_location" data-bind="click: updateMenu" type="button">Hatch</button>
+									<div class="o-action-menu__menu" data-menu="score" data-bind="if: current_menu() === 'score'">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item">Score</li>
+												<li class="breadcrumb-item active">Location</li>
+											</ol>
+											<div class="form-row">
+												<div class="col">
+													<button class="btn btn-success btn-lg" data-key="location" data-value="0" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Cell 1</button>
+												</div>
+												<div class="col">
+													<button class="btn btn-success btn-lg" data-key="location" data-value="1" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Cell 2</button>
+												</div>
+												<div class="col">
+													<button class="btn btn-success btn-lg" data-key="location" data-value="2" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Cell 3</button>
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="o-action-menu__menu" data-menu="pickup_location" data-bind="if: current_menu() === 'pickup_location'">
-										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
-											<li class="breadcrumb-item" data-bind="text: current_action().game_piece.formatted"></li>
-											<li class="breadcrumb-item active">Location</li>
-										</ol>
-										<div class="form-row">
-											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="1" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Loading Station</button>
-											</div>
-											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="0" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Ground</button>
-											</div>
-										</div>
-									</div>
-									<div class="o-action-menu__menu" data-menu="dropoff_location" data-bind="if: current_menu() === 'dropoff_location'">
-										<ol class="breadcrumb">
-											<li class="breadcrumb-item" data-bind="text: current_action().action_name.formatted"></li>
-											<li class="breadcrumb-item" data-bind="text: current_action().game_piece.formatted"></li>
-											<li class="breadcrumb-item active">Location</li>
-										</ol>
-										<div class="form-row">
-											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="2" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Cargo Ship</button>
-											</div>
-											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="3" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Rocket Level 1</button>
-											</div>
-											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="4" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Rocket Level 2</button>
-											</div>
-											<div class="col">
-												<button class="btn btn-success btn-lg" data-key="location" data-value="5" data-next="home" data-bind="click: updateMenu" type="button" data-submit>Rocket Level 3</button>
-											</div>
-										</div>
-									</div>
 									<button class="btn btn-danger" type="button" data-bind="click: cancel">Cancel</button>
 								</div>
 								<div>
@@ -279,7 +226,6 @@
 										<thead>
 											<tr>
 												<th scope="col">Action</th>
-												<th scope="col">Game Piece</th>
 												<th scope="col">Location</th>
 												<th scope="col"></th>
 											</tr>
@@ -287,7 +233,6 @@
 										<tbody data-bind="foreach: actions">
 											<tr>
 												<td data-bind="text: action_name.formatted"></td>
-												<td data-bind="text: game_piece.formatted"></td>
 												<td data-bind="text: location.formatted"></td>
 												<td class="recorded-action__delete"><button class="btn btn-danger btn-sm" data-bind="click: $parent.deleteAction">Delete</button></td>
 											</tr>
@@ -295,11 +240,11 @@
 									</table>
 								</div>
 							</div>
-							<h3>Defensive Interactions</h3>
+							<h3>Neutral Zone Interactions</h3>
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-prepend">
-										<button type="button" class="btn btn-success" data-bind="click: addDefenseInteraction">Log Defensive Interaction</button>
+										<button type="button" class="btn btn-success" data-bind="click: addDefenseInteraction">Log Interaction</button>
 									</div>
 									<input id="scout_match_defense" type="number" class="form-control" data-bind="value: defense_count">
 									<div class="input-group-append">
@@ -307,46 +252,10 @@
 									</div>
 								</div>
 								<small class="form-text text-muted">
-									A defensive interaction is an intentional contact or blocking of an opponent's robot.
-									Each 5 seconds of an interaction counts as a seperate interaction. For example a robot
-									pushing another robot for 15 seconds would could as 3 defensive interactions.
-									The robot must be actively interferring with another robot; if the robot is blocking a goal,
-									but there is no robot attempting to score then this wouldn't be a defensive interaction.
+									An interaction is any contact, intentional or unintentional, that occurs in the neutral zone.
 								</small>
 							</div>
-							<h2>End Game</h2>
-							<div class="form-row">
-								<div class="form-group col-6 col-md-5">
-									<label for="scout_match_end_platform">End Platform</label>
-									<select id="scout_match_end_platform" class="custom-select" data-bind="value: end_platform">
-										<option value="" selected disabled>Select Platform</option>
-										<option value="0">Didn't make it to platform</option>
-										<option value="1">Level 1</option>
-										<option value="2">Level 2</option>
-										<option value="3">Level 3</option>
-										<option value="4">Climbed on another robot</option>
-									</select>
-								</div>
-								<div class="form-group col-6 col-md-5">
-									<label for="scout_match_climb_speed">Climb Speed</label>
-									<select id="scout_match_climb_speed" class="custom-select" data-bind="value: climb_speed">
-										<option value="" selected disabled>Select Speed</option>
-										<option value="0">Didn't climb</option>
-										<option value="1">1-3 seconds</option>
-										<option value="2">3-10 seconds</option>
-										<option value="3">&gt; 10 seconds</option>
-									</select>
-								</div>
-								<div class="form-group col-6 col-md-2">
-									<label>&nbsp;</label>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="scout_match_climb_help" data-bind="checked: carried">
-										<label class="form-check-label" for="scout_match_climb_help">
-											Carried another robot
-										</label>
-									</div>
-								</div>
-							</div>
+
 							<h2>Overall</h2>
 							<div class="form-group">
 								<label for="scout_match_speed">Robot Speed</label>

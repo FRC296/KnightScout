@@ -7,8 +7,7 @@ const TOURNAMENT_LEVELS = [
 
 
 const ACTION_MAPPING = [
-	'Pickup',
-	'Dropoff'
+	'Score'
 ];
 
 const ACTION_STAT_MAPPING = [
@@ -28,12 +27,9 @@ const GAME_PIECE_STAT_MAPPING = [
 ];
 
 const LOCATION_MAPPING = [
-	'Ground',
-	'Loading Station',
-	'Cargo Ship',
-	'Rocket Level 1',
-	'Rocket Level 2',
-	'Rocket Level 3'
+	'Score Cell 1',
+	'Score Cell 2',
+	'Score Cell 3'
 ];
 
 const LOCATION_STAT_MAPPING = [

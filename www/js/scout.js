@@ -1,6 +1,6 @@
 class Scout {
 	constructor(app_state) {
-		let stored_scout = JSON.parse(localStorage.getItem('scout') || null);
+		let stored_scout = JSON.parse(localStorage.getItem('scout_2') || null);
 
 		this.scout_name = ko.observable(stored_scout && stored_scout.scout_name || '');
 		this.current_sheet = ko.observable(new Sheet(ko.toJS(app_state.current_event)));
@@ -46,7 +46,7 @@ class Scout {
 
 		$(document).on('persist_scout', () => {
 			try {
-				localStorage.setItem('scout', ko.toJSON(this));
+				localStorage.setItem('scout_2', ko.toJSON(this));
 			} catch(e) {
 				bootbox.alert("Could not save scouting sheets. Try deleting old scouting sheets to make more room.");
 			}
