@@ -3,74 +3,37 @@ class TeamStatistics {
 		this.team_number = ko.observable(team_statistics.team_number);
 		this.matches_scouted = ko.observable(team_statistics.matches_scouted);
 
-		this.starts_hatch = ko.observable(team_statistics.starts_hatch);
-		this.starts_hatch.formatted = ko.computed(() => this.formatStat(this.starts_hatch(), true), this);
-		this.starts_cargo = ko.observable(team_statistics.starts_cargo);
-		this.starts_cargo.formatted = ko.computed(() => this.formatStat(this.starts_cargo(), true), this);
+		this.starts_particle = ko.observable(team_statistics.starts_particle);
+		this.starts_particle.formatted = ko.computed(() => this.formatStat(this.starts_particle(), true), this);
 		this.starts_nothing = ko.observable(team_statistics.starts_nothing);
 		this.starts_nothing.formatted = ko.computed(() => this.formatStat(this.starts_nothing(), true), this);
 
-		this.auton_bonus_score = ko.observable(team_statistics.auton_bonus_score);
-		this.auton_bonus_score.formatted = ko.computed(() => this.formatStat(this.auton_bonus_score()), this);
+		this.auton_bonus_no_move = ko.observable(team_statistics.auton_bonus_no_move);
+		this.auton_bonus_no_move.formatted = ko.computed(() => this.formatStat(this.auton_bonus_no_move(), true), this);
+		this.auton_bonus_no_score = ko.observable(team_statistics.auton_bonus_no_score);
+		this.auton_bonus_no_score.formatted = ko.computed(() => this.formatStat(this.auton_bonus_no_score(), true), this);
+		this.auton_score_1 = ko.observable(team_statistics.auton_score_1);
+		this.auton_score_1.formatted = ko.computed(() => this.formatStat(this.auton_score_1(), true), this);
+		this.auton_score_2 = ko.observable(team_statistics.auton_score_2);
+		this.auton_score_2.formatted = ko.computed(() => this.formatStat(this.auton_score_2(), true), this);
+		this.auton_score_3 = ko.observable(team_statistics.auton_score_3);
+		this.auton_score_3.formatted = ko.computed(() => this.formatStat(this.auton_score_3(), true), this);
+
 		this.auton_mobility_score = ko.observable(team_statistics.auton_mobility_score);
 		this.auton_mobility_score.formatted = ko.computed(() => this.formatStat(this.auton_mobility_score()), this);
 
 		this.avg_defense_counts = ko.observable(team_statistics.avg_defense_counts);
 		this.avg_defense_counts.formatted = ko.computed(() => this.formatStat(this.avg_defense_counts()), this);
 
-		this.end_fail = ko.observable(team_statistics.end_fail);
-		this.end_fail.formatted = ko.computed(() => this.formatStat(this.end_fail(), true), this);
-		this.end_lvl1 = ko.observable(team_statistics.end_lvl1);
-		this.end_lvl1.formatted = ko.computed(() => this.formatStat(this.end_lvl1(), true), this);
-		this.end_lvl2 = ko.observable(team_statistics.end_lvl2);
-		this.end_lvl2.formatted = ko.computed(() => this.formatStat(this.end_lvl2(), true), this);
-		this.end_lvl3 = ko.observable(team_statistics.end_lvl3);
-		this.end_lvl3.formatted = ko.computed(() => this.formatStat(this.end_lvl3(), true), this);
-		this.end_climb = ko.observable(team_statistics.end_climb);
-		this.end_climb.formatted = ko.computed(() => this.formatStat(this.end_climb(), true), this);
-
-		this.climb_speed_score = ko.observable(team_statistics.climb_speed_score);
-		this.climb_speed_score.formatted = ko.computed(() => this.formatStat(this.climb_speed_score()), this);
-		this.carry_score = ko.observable(team_statistics.carry_score);
-		this.carry_score.formatted = ko.computed(() => this.formatStat(this.carry_score(), true), this);
+		this.score_1 = ko.observable(team_statistics.score_1);
+		this.score_1.formatted = ko.computed(() => this.formatStat(this.score_1()), this);
+		this.score_2 = ko.observable(team_statistics.score_2);
+		this.score_2.formatted = ko.computed(() => this.formatStat(this.score_2()), this);
+		this.score_3 = ko.observable(team_statistics.score_3);
+		this.score_3.formatted = ko.computed(() => this.formatStat(this.score_3()), this);
 
 		this.robot_speed_score = ko.observable(team_statistics.robot_speed_score);
 		this.robot_speed_score.formatted = ko.computed(() => this.formatStat(this.robot_speed_score()), this);
-
-		this.pickup_hatch_total = ko.observable(team_statistics.pickup_hatch_total); // Average # of hatches picked up per match
-		this.pickup_hatch_total.formatted = ko.computed(() => this.formatStat(this.pickup_hatch_total()), this);
-		this.pickup_hatch_ground = ko.observable(team_statistics.pickup_hatch_ground); // % of picked up hatches from the ground
-		this.pickup_hatch_ground.formatted = ko.computed(() => this.formatStat(this.pickup_hatch_ground(), true), this);
-		this.pickup_hatch_loading = ko.observable(team_statistics.pickup_hatch_loading); // % of picked up hatches from the loading
-		this.pickup_hatch_loading.formatted = ko.computed(() => this.formatStat(this.pickup_hatch_loading(), true), this);
-		this.pickup_cargo_total = ko.observable(team_statistics.pickup_cargo_total); // Average # of cargo picked up per match
-		this.pickup_cargo_total.formatted = ko.computed(() => this.formatStat(this.pickup_cargo_total()), this);
-		this.pickup_cargo_ground = ko.observable(team_statistics.pickup_cargo_ground); // % of picked up cargo from the ground
-		this.pickup_cargo_ground.formatted = ko.computed(() => this.formatStat(this.pickup_cargo_ground(), true), this);
-		this.pickup_cargo_loading = ko.observable(team_statistics.pickup_cargo_loading); // % of picked up cargo from the loading
-		this.pickup_cargo_loading.formatted = ko.computed(() => this.formatStat(this.pickup_cargo_loading(), true), this);
-
-		this.drop_hatch_total = ko.observable(team_statistics.drop_hatch_total);
-		this.drop_hatch_total_avg = ko.observable(team_statistics.drop_hatch_total_avg);
-		this.drop_hatch_ship = ko.observable(team_statistics.drop_hatch_ship); // Average # of hatches scored at ship per match
-		this.drop_hatch_ship.formatted = ko.computed(() => this.formatStat(this.drop_hatch_ship()), this);
-		this.drop_hatch_r1 = ko.observable(team_statistics.drop_hatch_r1); // Average # of hatches scored at r1 per match
-		this.drop_hatch_r1.formatted = ko.computed(() => this.formatStat(this.drop_hatch_r1()), this);
-		this.drop_hatch_r2 = ko.observable(team_statistics.drop_hatch_r2); // Average # of hatches scored at r2 per match
-		this.drop_hatch_r2.formatted = ko.computed(() => this.formatStat(this.drop_hatch_r2()), this);
-		this.drop_hatch_r3 = ko.observable(team_statistics.drop_hatch_r3); // Average # of hatches scored at r3 per match
-		this.drop_hatch_r3.formatted = ko.computed(() => this.formatStat(this.drop_hatch_r3()), this);
-
-		this.drop_cargo_total = ko.observable(team_statistics.drop_cargo_total);
-		this.drop_cargo_total_avg = ko.observable(team_statistics.drop_cargo_total_avg);
-		this.drop_cargo_ship = ko.observable(team_statistics.drop_cargo_ship); // Average # of cargo scored at ship per match
-		this.drop_cargo_ship.formatted = ko.computed(() => this.formatStat(this.drop_cargo_ship()), this);
-		this.drop_cargo_r1 = ko.observable(team_statistics.drop_cargo_r1); // Average # of cargo scored at r1 per match
-		this.drop_cargo_r1.formatted = ko.computed(() => this.formatStat(this.drop_cargo_r1()), this);
-		this.drop_cargo_r2 = ko.observable(team_statistics.drop_cargo_r2); // Average # of cargo scored at r2 per match
-		this.drop_cargo_r2.formatted = ko.computed(() => this.formatStat(this.drop_cargo_r2()), this);
-		this.drop_cargo_r3 = ko.observable(team_statistics.drop_cargo_r3); // Average # of cargo scored at r3 per match
-		this.drop_cargo_r3.formatted = ko.computed(() => this.formatStat(this.drop_cargo_r3()), this);
 	}
 
 	formatStat(stat, percentage) {

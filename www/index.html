@@ -162,8 +162,8 @@
 								<label for="scout_match_start_piece">Starts with</label>
 								<select id="scout_match_start_piece" class="custom-select" data-bind="value: starts_with">
 									<option value="" selected disabled>Select Piece</option>
-									<option value="0">Particle</option>
-									<option value="1">Nothing</option>
+									<option value="0">Nothing</option>
+									<option value="1">Particle</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -310,28 +310,32 @@
 									<tr>
 										<th scope="col">Team</th>
 										<th scope="col">#</th>
-										<th scope="col" colspan="3">Starts</th>
-										<th scope="col" colspan="2">Auton</th>
+										<th scope="col" colspan="2">Starts</th>
+										<th scope="col" colspan="5">Auton</th>
 									</tr>
 									<tr>
 										<th></th>
 										<th></th>
-										<th>H</th>
-										<th>C</th>
 										<th>N</th>
-										<th>B</th>
-										<th>S</th>
+										<th>P</th>
+										<th>NM</th>
+										<th>NS</th>
+										<th>1</th>
+										<th>2</th>
+										<th>3</th>
 									</tr>
 								</thead>
 								<tbody data-bind="foreach: scout.team_stats()">
 									<tr>
 										<td><a href="#" data-bind="text: team_number, click: view.bind($data)"></a></td>
 										<td data-bind="text: matches_scouted"></td>
-										<td data-bind="text: starts_hatch.formatted()"></td>
-										<td data-bind="text: starts_cargo.formatted()"></td>
 										<td data-bind="text: starts_nothing.formatted()"></td>
-										<td data-bind="text: auton_bonus_score.formatted()"></td>
-										<td data-bind="text: auton_mobility_score.formatted()"></td>
+										<td data-bind="text: starts_particle.formatted()"></td>
+										<td data-bind="text: auton_bonus_no_move.formatted()"></td>
+										<td data-bind="text: auton_bonus_no_score.formatted()"></td>
+										<td data-bind="text: auton_score_1.formatted()"></td>
+										<td data-bind="text: auton_score_2.formatted()"></td>
+										<td data-bind="text: auton_score_3.formatted()"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -343,29 +347,15 @@
 									<tr>
 										<th scope="col">Team</th>
 										<th scope="col">#</th>
-										<th scope="col" colspan="3">Pick H</th>
-										<th scope="col" colspan="3">Pick C</th>
-										<th scope="col" colspan="4">Drop H</th>
-										<th scope="col" colspan="4">Drop C</th>
+										<th scope="col" colspan="3">Score</th>
 										<th scope="col">Def</th>
 									</tr>
 									<tr>
 										<th></th>
 										<th></th>
-										<th>T</th>
-										<th>G%</th>
-										<th>L%</th>
-										<th>T</th>
-										<th>G%</th>
-										<th>L%</th>
-										<th>S</th>
-										<th>R1</th>
-										<th>R2</th>
-										<th>R3</th>
-										<th>S</th>
-										<th>R1</th>
-										<th>R2</th>
-										<th>R3</th>
+										<th>1</th>
+										<th>2</th>
+										<th>3</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -373,20 +363,9 @@
 									<tr>
 										<td><a href="#" data-bind="text: team_number, click: view.bind($data)"></a></td>
 										<td data-bind="text: matches_scouted"></td>
-										<td data-bind="text: pickup_hatch_total.formatted()"></td>
-										<td data-bind="text: pickup_hatch_ground.formatted()"></td>
-										<td data-bind="text: pickup_hatch_loading.formatted()"></td>
-										<td data-bind="text: pickup_cargo_total.formatted()"></td>
-										<td data-bind="text: pickup_cargo_ground.formatted()"></td>
-										<td data-bind="text: pickup_cargo_loading.formatted()"></td>
-										<td data-bind="text: drop_hatch_ship.formatted()"></td>
-										<td data-bind="text: drop_hatch_r1.formatted()"></td>
-										<td data-bind="text: drop_hatch_r2.formatted()"></td>
-										<td data-bind="text: drop_hatch_r3.formatted()"></td>
-										<td data-bind="text: drop_cargo_ship.formatted()"></td>
-										<td data-bind="text: drop_cargo_r1.formatted()"></td>
-										<td data-bind="text: drop_cargo_r2.formatted()"></td>
-										<td data-bind="text: drop_cargo_r3.formatted()"></td>
+										<td data-bind="text: score_1"></td>
+										<td data-bind="text: score_2"></td>
+										<td data-bind="text: score_3"></td>
 										<td data-bind="text: avg_defense_counts.formatted()"></td>
 									</tr>
 								</tbody>
@@ -399,19 +378,11 @@
 									<tr>
 										<th scope="col">Team</th>
 										<th scope="col">#</th>
-										<th scope="col" colspan="4">End</th>
-										<th scope="col" colspan="2">Climb</th>
 										<th scope="col">RS</th>
 									</tr>
 									<tr>
 										<th></th>
 										<th></th>
-										<th>F</th>
-										<th>1</th>
-										<th>2</th>
-										<th>3</th>
-										<th>S</th>
-										<th>C</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -419,12 +390,6 @@
 									<tr>
 										<td><a href="#" data-bind="text: team_number, click: view.bind($data)"></a></td>
 										<td data-bind="text: matches_scouted"></td>
-										<td data-bind="text: end_fail.formatted()"></td>
-										<td data-bind="text: end_lvl1.formatted()"></td>
-										<td data-bind="text: end_lvl2.formatted()"></td>
-										<td data-bind="text: end_lvl3.formatted()"></td>
-										<td data-bind="text: climb_speed_score.formatted()"></td>
-										<td data-bind="text: carry_score.formatted()"></td>
 										<td data-bind="text: robot_speed_score.formatted()"></td>
 									</tr>
 								</tbody>
@@ -452,9 +417,8 @@
 						<p class="card-text">The percentage of matches that a team started with a particular game piece</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Hatch: <span class="badge badge-primary" data-bind="text: starts_hatch.formatted()"></span></li>
-						<li class="list-group-item">Cargo: <span class="badge badge-primary" data-bind="text: starts_cargo.formatted()"></span></li>
 						<li class="list-group-item">Nothing: <span class="badge badge-primary" data-bind="text: starts_nothing.formatted()"></span></li>
+						<li class="list-group-item">Particle: <span class="badge badge-primary" data-bind="text: starts_particle.formatted()"></span></li>
 					</ul>
 				</div>
 				<br />
@@ -464,17 +428,13 @@
 					</div>
 					<div class="card-body">
 						<h5 class="card-title">Average autonomous scores</h5>
-						<p class="card-text">
-							Bonus:
-							<ol start="0">
-								<li>Didn't pass HAB line</li>
-								<li>Launched from level 1</li>
-								<li>Launched from level 2</li>
-							</ol>
-						</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Autonomous Bonus: <span class="badge badge-primary"><span data-bind="text: auton_bonus_score.formatted()"></span> / 2</span></li>
+						<li class="list-group-item">Didn't Move: <span class="badge badge-light" data-bind="text: auton_bonus_no_move.formatted()"></span></li>
+						<li class="list-group-item">Didn't Score: <span class="badge badge-dark" data-bind="text: auton_bonus_no_score.formatted()"></span></li>
+						<li class="list-group-item">Score Cell 1: <span class="badge badge-cell1" data-bind="text: auton_score_1.formatted()"></span></li>
+						<li class="list-group-item">Score Cell 2: <span class="badge badge-cell2" data-bind="text: auton_score_2.formatted()"></span></li>
+						<li class="list-group-item">Score Cell 3: <span class="badge badge-cell3" data-bind="text: auton_score_3.formatted()"></span></li>
 					</ul>
 					<div class="card-body">
 						<p class="card-text">
@@ -484,12 +444,11 @@
 								<li>Derpy movement</li>
 								<li>Moves but doesn't do anything</li>
 								<li>Places 1 piece</li>
-								<li>Places more than 1 piece</li>
 							</ol>
 						</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Autonomous Mobility: <span class="badge badge-primary"><span data-bind="text: auton_mobility_score.formatted()"></span> / 4</span></li>
+						<li class="list-group-item">Autonomous Mobility: <span class="badge badge-primary"><span data-bind="text: auton_mobility_score.formatted()"></span> / 3</span></li>
 					</ul>
 				</div>
 				<br />
@@ -499,45 +458,13 @@
 					</div>
 					<div class="card-body">
 						<p class="card-text">
-							Hatch Pickup Performance
+							Scoring Performance, average particles per match
 						</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Average per match: <span class="badge badge-primary" data-bind="text: pickup_hatch_total.formatted()"></span></li>
-						<li class="list-group-item">% from ground: <span class="badge badge-primary" data-bind="text: pickup_hatch_ground.formatted()"></span></li>
-						<li class="list-group-item">% from station: <span class="badge badge-primary" data-bind="text: pickup_hatch_loading.formatted()"></span></li>
-					</ul>
-					<div class="card-body">
-						<p class="card-text">
-							Cargo Pickup Performance
-						</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Average per match: <span class="badge badge-primary" data-bind="text: pickup_cargo_total.formatted()"></span></li>
-						<li class="list-group-item">% from ground: <span class="badge badge-primary" data-bind="text: pickup_cargo_ground.formatted()"></span></li>
-						<li class="list-group-item">% from station: <span class="badge badge-primary" data-bind="text: pickup_cargo_loading.formatted()"></span></li>
-					</ul>
-					<div class="card-body">
-						<p class="card-text">
-							Hatch Scoring Performance. Average number of dropoffs per match at the following locations:
-						</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Ship: <span class="badge badge-primary" data-bind="text: drop_hatch_ship.formatted()"></span></li>
-						<li class="list-group-item">Rocket 1: <span class="badge badge-primary" data-bind="text: drop_hatch_r1.formatted()"></span></li>
-						<li class="list-group-item">Rocket 2: <span class="badge badge-primary" data-bind="text: drop_hatch_r2.formatted()"></span></li>
-						<li class="list-group-item">Rocket 3: <span class="badge badge-primary" data-bind="text: drop_hatch_r3.formatted()"></span></li>
-					</ul>
-					<div class="card-body">
-						<p class="card-text">
-							Cargo Scoring Performance. Average number of dropoffs per match at the following locations:
-						</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Ship: <span class="badge badge-primary" data-bind="text: drop_cargo_ship.formatted()"></span></li>
-						<li class="list-group-item">Rocket 1: <span class="badge badge-primary" data-bind="text: drop_cargo_r1.formatted()"></span></li>
-						<li class="list-group-item">Rocket 2: <span class="badge badge-primary" data-bind="text: drop_cargo_r2.formatted()"></span></li>
-						<li class="list-group-item">Rocket 3: <span class="badge badge-primary" data-bind="text: drop_cargo_r3.formatted()"></span></li>
+						<li class="list-group-item">Cell 1: <span class="badge badge-cell1" data-bind="text: score_1.formatted()"></span></li>
+						<li class="list-group-item">Cell 2: <span class="badge badge-cell2" data-bind="text: score_2.formatted()"></span></li>
+						<li class="list-group-item">Cell 3: <span class="badge badge-cell3" data-bind="text: score_3.formatted()"></span></li>
 					</ul>
 				</div>
 				<br />
@@ -547,40 +474,6 @@
 					</div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Average Defensive Interactions: <span class="badge badge-primary" data-bind="text: avg_defense_counts.formatted()"></span></li>
-					</ul>
-				</div>
-				<br />
-				<div class="card">
-					<div class="card-header">
-						End Game
-					</div>
-					<div class="card-body">
-						<p class="card-text">
-							Final platform location
-						</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Failed: <span class="badge badge-primary" data-bind="text: end_fail.formatted()"></span></li>
-						<li class="list-group-item">Level 1: <span class="badge badge-primary" data-bind="text: end_lvl1.formatted()"></span></li>
-						<li class="list-group-item">Level 2: <span class="badge badge-primary" data-bind="text: end_lvl2.formatted()"></span></li>
-						<li class="list-group-item">Level 3: <span class="badge badge-primary" data-bind="text: end_lvl3.formatted()"></span></li>
-						<li class="list-group-item">Climbed on other robot: <span class="badge badge-primary" data-bind="text: end_climb.formatted()"></span></li>
-					</ul>
-					<div class="card-body">
-						<p class="card-text">
-							<h5 class="card-title">Climbing stats</h5>
-							Climb speed:
-							<ol start="0">
-								<li>Didn't climb</li>
-								<li>1-3 seconds</li>
-								<li>3-10 seconds</li>
-								<li>&gt; 10 seconds</li>
-							</ol>
-						</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Climb speed: <span class="badge badge-primary" data-bind="text: climb_speed_score.formatted()"></span></li>
-						<li class="list-group-item">% of matches with robot carried: <span class="badge badge-primary" data-bind="text: carry_score.formatted()"></span></li>
 					</ul>
 				</div>
 			</div>
@@ -686,81 +579,30 @@
 							<div class="card-body">
 								<h6 class="card-title">Start</h6>
 								<p class="card-text">
-									<span class="badge badge-hatch" data-bind="text: starts_hatch.formatted()"></span>
-									<span class="badge badge-cargo" data-bind="text: starts_cargo.formatted()"></span>
+									<span class="badge badge-cargo" data-bind="text: starts_particle.formatted()"></span>
 									<span class="badge badge-dark" data-bind="text: starts_nothing.formatted()"></span>
 								</p>
 								<h6 class="card-title">Auton</h6>
 								<p class="card-text">
-									Bonus: <span class="badge badge-primary"><span data-bind="text: auton_bonus_score.formatted()"></span> / 2</span>
+									Score:
+										<span class="badge badge-light" data-bind="text: auton_bonus_no_move.formatted()"></span>
+										<span class="badge badge-dark" data-bind="text: auton_bonus_no_score.formatted()"></span>
+										<span class="badge badge-cell1" data-bind="text: auton_score_1.formatted()"></span>
+										<span class="badge badge-cell2" data-bind="text: auton_score_2.formatted()"></span>
+										<span class="badge badge-cell3" data-bind="text: auton_score_3.formatted()"></span>
 									<br />
 									Mobility: <span class="badge badge-success"><span data-bind="text: auton_mobility_score.formatted()"></span> / 4</span>
 								</p>
-								<h6 class="card-title">Pickup</h6>
-								<table class="table table-sm table-striped">
-									<thead>
-										<th>#</th>
-										<th>GND</th>
-										<th>STN</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td><span class="badge badge-hatch" data-bind="text: pickup_hatch_total.formatted()"></span></td>
-											<td><span class="badge badge-hatch" data-bind="text: pickup_hatch_ground.formatted()"></span></td>
-											<td><span class="badge badge-hatch" data-bind="text: pickup_hatch_loading.formatted()"></span></td>
-										</tr>
-										<tr>
-											<td><span class="badge badge-cargo" data-bind="text: pickup_cargo_total.formatted()"></span></td>
-											<td><span class="badge badge-cargo" data-bind="text: pickup_cargo_ground.formatted()"></span></td>
-											<td><span class="badge badge-cargo" data-bind="text: pickup_cargo_loading.formatted()"></span></td>
-										</tr>
-									</tbody>
-								</table>
-								<h6 class="card-title">Dropoff</h6>
-								<table class="table table-sm table-striped">
-									<thead>
-										<th>SHIP</th>
-										<th>R1</th>
-										<th>R2</th>
-										<th>R3</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_ship.formatted()"></span></td>
-											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_r1.formatted()"></span></td>
-											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_r2.formatted()"></span></td>
-											<td><span class="badge badge-hatch" data-bind="text: drop_hatch_r3.formatted()"></span></td>
-										</tr>
-										<tr>
-											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_ship.formatted()"></span></td>
-											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_r1.formatted()"></span></td>
-											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_r2.formatted()"></span></td>
-											<td><span class="badge badge-cargo" data-bind="text: drop_cargo_r3.formatted()"></span></td>
-										</tr>
-									</tbody>
-								</table>
+								<h6 class="card-title">Telop</h6>
+								<p class="card-text">
+									Score:
+										<span class="badge badge-cell1" data-bind="text: score_1.formatted()"></span>
+										<span class="badge badge-cell2" data-bind="text: score_2.formatted()"></span>
+										<span class="badge badge-cell3" data-bind="text: score_3.formatted()"></span>
+									<br />
+									Mobility: <span class="badge badge-success"><span data-bind="text: robot_speed_score.formatted()"></span> / 4</span>
+								</p>
 								<h6 class="card-title">Def: <span class="badge badge-primary" data-bind="text: avg_defense_counts.formatted()"></span></h6>
-								<h6 class="card-title">End</h6>
-								<table class="table table-sm table-striped">
-									<thead>
-										<th>F</th>
-										<th>L1</th>
-										<th>L2</th>
-										<th>L3</th>
-										<th>R</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td><span class="badge badge-danger" data-bind="text: end_fail.formatted()"></span></td>
-											<td><span class="badge badge-primary" data-bind="text: end_lvl1.formatted()"></span></td>
-											<td><span class="badge badge-primary" data-bind="text: end_lvl2.formatted()"></span></td>
-											<td><span class="badge badge-primary" data-bind="text: end_lvl3.formatted()"></span></td>
-											<td><span class="badge badge-success" data-bind="text: end_climb.formatted()"></span></td>
-										</tr>
-									</tbody>
-								</table>
-								<h6 class="card-title">Climb Speed: <span class="badge badge-primary"><span data-bind="text: climb_speed_score.formatted()"></span> / 3</span></h6>
-								<h6 class="card-title">Help Climb: <span class="badge badge-success" data-bind="text: carry_score.formatted()"></span></h6>
 							</div>
 						</div>
 					</div>
