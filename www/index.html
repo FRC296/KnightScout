@@ -167,8 +167,8 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="scout_match_start_piece">Autonomous Bonus</label>
-								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_bonus">
+								<label for="scout_match_auton_bonus">Autonomous Bonus</label>
+								<select id="scout_match_auton_bonus" class="custom-select" data-bind="value: auton_bonus">
 									<option value="" selected disabled>Select Bonus</option>
 									<option value="0">Didn't Move</option>
 									<option value="1">Didn't Score</option>
@@ -178,8 +178,8 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="scout_match_start_piece">Autonomous Mobility</label>
-								<select id="scout_match_start_piece" class="custom-select" data-bind="value: auton_mobility">
+								<label for="scout_match_auton_mob">Autonomous Mobility</label>
+								<select id="scout_match_auton_mob" class="custom-select" data-bind="value: auton_mobility">
 									<option value="" selected disabled>Select Mobility</option>
 									<option value="0">Didn't move</option>
 									<option value="1">Derpy movement</option>
@@ -405,7 +405,7 @@
 					<h1>Profile - Team <span class="badge badge-primary" data-bind="text: team_number"></span></h1>
 					<p class="lead">
 						Matches scouted: <span class="badge badge-primary" data-bind="text: matches_scouted"></span><br />
-						Overall robot speed: <span class="badge badge-primary"><span data-bind="text: robot_speed_score.formatted()"></span> / 5</span>
+						Overall robot speed: <span class="badge badge-primary"><span data-bind="text: robot_speed_score.formatted()"></span> / 4</span>
 					</p>
 				</div>
 				<br />
@@ -591,7 +591,7 @@
 										<span class="badge badge-cell2" data-bind="text: auton_score_2.formatted()"></span>
 										<span class="badge badge-cell3" data-bind="text: auton_score_3.formatted()"></span>
 									<br />
-									Mobility: <span class="badge badge-success"><span data-bind="text: auton_mobility_score.formatted()"></span> / 4</span>
+									Mobility: <span class="badge badge-success"><span data-bind="text: auton_mobility_score.formatted()"></span> / 3</span>
 								</p>
 								<h6 class="card-title">Telop</h6>
 								<p class="card-text">
