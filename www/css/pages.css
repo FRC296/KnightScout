@@ -42,6 +42,17 @@
 	color: #000000;
 }
 
+.badge-cell1 {
+	background-color: pink;
+}
+.badge-cell2 {
+	background-color: LightSkyBlue;
+}
+.badge-cell3 {
+	background-color: SlateBlue;
+	color: #fff;
+}
+
 @media (max-width: 768px) and (min-width: 576px) {
 	.strategy-cards .col-sm-4 {
 		padding: 0;

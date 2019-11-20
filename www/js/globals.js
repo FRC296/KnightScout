@@ -32,13 +32,13 @@ class AppState {
 		this.scout = new Scout(this);
 		this.sheet_maker = new SheetMaker();
 
-		let stored_strat_sheets = JSON.parse(localStorage.getItem('strategy_sheets') || null) || [];
+		let stored_strat_sheets = JSON.parse(localStorage.getItem('strategy_sheets_2') || null) || [];
 
 		this.strategy_sheets = new ko.observableArray(stored_strat_sheets.map(x => MakeStrategySheet(x)));
 
 		this.strategy_sheets.subscribe((sheets) => {
 			try {
-				localStorage.setItem('strategy_sheets', ko.toJSON(sheets));
+				localStorage.setItem('strategy_sheets_2', ko.toJSON(sheets));
 			} catch(e) {
 				bootbox.alert("Could not save strategy sheet. Try deleting old strategy sheets to make more room.");
 			}
